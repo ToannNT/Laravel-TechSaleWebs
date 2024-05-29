@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  font-family: "Montserrat", sans-serif;
+}
+.infomation_lg {
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+}
+/* .navbar {
+  padding: 20px;
+  height: 86px;
+} */
+header i:hover {
+  opacity: 0.5;
+  transition: 0.3s ease-in-out;
+}
+.btn-nav {
+  border: none;
+}
+.btn-nav:focus {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+.nav-link {
+  font-size: 1.2rem;
+  color: rgb(55, 54, 54);
+  position: relative;
+}
+
+.nav-link:hover,
+.nav-link:active {
+  color: rgb(0, 0, 0);
+  transition: 0.3s ease-in-out;
+  font-weight: 600;
+}
+
+@media (min-width: 990px) {
+  .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: rgb(231, 76, 60);
+    visibility: hidden;
+    transition: 0.3s ease-in-out;
+  }
+
+  .nav-link:hover::before,
+  .nav-link.active::before {
+    width: 80%;
+    visibility: visible;
+  }
+}
+
+/* product detall  */
+
+.nav-link__btn-detail::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  /* height: 2px; */
+  border: 3px solid rgb(231, 76, 60);
+  visibility: hidden;
+  transition: 0.3s ease-in-out;
+}
+
+.nav-link__btn-detail:hover::before,
+.nav-link__btn-detail.active::before {
+  width: 70%;
+  visibility: visible;
+}
+/* admin  */
+
+.nav-link__btn-admin::before {
+  content: "";
+  position: unset;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  /* height: 2px; */
+  border: none;
+  visibility: hidden;
+  transition: 0.3s ease-in-out;
+}
+
+.nav-link__btn-admin:hover::before,
+.nav-link__btn-admin.active::before {
+  width: 80%;
+  visibility: visible;
+}
