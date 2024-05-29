@@ -4,17 +4,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\testcontroller;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\OrderDetailController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\PaymentSuccessController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\ProductDetailController;
-use App\Http\Controllers\testcontroller;
+use App\Http\Controllers\PaymentSuccessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,9 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
+Route::get('verify-email/{id}/{token}', [VerificationController::class, 'verify'])->name('verify-email');
+
+
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::get('/order', [OrderController::class, 'index'])->name('order');

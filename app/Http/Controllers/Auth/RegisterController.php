@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Mail\VerifyEmail;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
 
@@ -43,12 +46,13 @@ class RegisterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'verification_token' => Str::random(32),
         ]);
-
+        //gửi mail
+        Mail::to($user->email)->send(new VerifyEmail($user));
         event(new Registered($user));
-
-        auth()->login($user);
-
-        return redirect()->route('login')->with('success', 'Đăng ký tài khoản thành công');
+        // bỏ sau khi verify email
+        // auth()->login($user);
+        return redirect()->route('login')->with('success', 'Đăng ký tài khoản thành công. Vui lòng xác thực tài khoản qua Email!.');
     }
 }
