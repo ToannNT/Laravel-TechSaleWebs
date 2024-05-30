@@ -76,27 +76,31 @@
         <section class="container login-wrapper mt-4">
             <div class="d-flex justify-content-center">
                 <div class="col-12 col-sm-8 col-lg-4">
-                    <form name="myForm" ng-submit="login()" class="needs-validation" novalidate>
+                    <form method="POST" action="{{ route('login.submit') }}" class="needs-validation">
+                        @csrf
                         <h2 class="fs-3 fw-medium mb-4 text text-center">Đăng nhập</h2>
                         <label for="email" class="form-label">Tên đăng nhập emai*:</label>
-                        <input id="email" ng-model="email" type="email"
-                            class="w-100 form-control bg-secondary-subtle p-2 mb-3" pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-                            required />
-                        <div class="invalid-feedback mb-1">Vui lòng nhập đúng định dạng email !</div>
+                        <input id="email" name="email" type="email"
+                            class="w-100 form-control bg-secondary-subtle p-2 mb-3" />
+                        @error('email')
+                            <div class="invalid-feedback d-block mb-1">{{ $message }}</div>
+                        @enderror
 
                         <label for="password" class="form-label">Mật khẩu*:</label>
-                        <input id="password" ng-model="password" type="password"
-                            class="w-100 form-control bg-secondary-subtle p-2 mb-3"
-                            pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required />
-                        <div class="invalid-feedback mb-1">Có chữ hoa, chữ thường, kí tự đặt biệt và ít nhất 8 ký tự !</div>
+                        <input id="password" name="password" type="password"
+                            class="w-100 form-control bg-secondary-subtle p-2 mb-3" />
+                        @error('password')
+                            <div class="invalid-feedback d-block mb-1">{{ $message }}</div>
+                        @enderror
 
                         <div class="row mb-3">
                             <div class="col-6 d-flex">
-                                <input class="form-check me-2" type="checkbox" />
+                                <input class="form-check me-2" type="checkbox" name="remember" />
                                 <span>Ghi nhớ</span>
                             </div>
                             <div class="col-6 text-end">
-                                <a class="text-decoration-none text-dark" href="#!forgotPassword">Quên mật khẩu</a>
+                                <a class="text-decoration-none text-dark" href="#">Quên mật
+                                    khẩu</a>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -109,7 +113,7 @@
                             <div class="col-12">
                                 <p>
                                     Bạn chưa có tài khoản ?
-                                    <a class="fw-semibold text-dark" href="#!register">Đăng ký</a>
+                                    <a class="fw-semibold text-dark" href="{{ route('register') }}">Đăng ký</a>
                                 </p>
                             </div>
                         </div>

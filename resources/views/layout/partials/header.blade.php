@@ -75,13 +75,37 @@
 
                 <li class="nav-item" ng-if="!nameEmailUser">
                     <div class="dropdown">
-                        <a class="nav-link p-3" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{-- check exist user login  --}}
+                        @if (Auth::check())
+                            <a class="nav-link p-3" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fs-4 text-black fa-solid fa-user"></i>
+                                <span class="fs-6">{{ Auth::user()->name }}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('login') }}">Hồ sơ</a></li>
+                                <li><a class="dropdown-item" href="{{ route('register') }}">Đơn hàng</a></li>
+                                <form action="{{ route('logout.submit') }}" method="POST">
+                                    @csrf
+                                    <li><button type="submit" class="dropdown-item">Đăng xuất</button></li>
+                                </form>
+                            </ul>
+                        @else
+                            <a class="nav-link p-3" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fs-4 text-black fa-solid fa-user"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('login') }}">Đăng nhập</a></li>
+                                <li><a class="dropdown-item" href="{{ route('register') }}">Đăng ký</a></li>
+                            </ul>
+                        @endif
+                        {{-- <a class="nav-link p-3" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 text-black fa-solid fa-user"></i>
                         </a>
+
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ route('login') }}">Đăng nhập</a></li>
                             <li><a class="dropdown-item" href="{{ route('register') }}">Đăng ký</a></li>
-                        </ul>
+                        </ul> --}}
                     </div>
                 </li>
 
@@ -114,7 +138,8 @@
     </nav>
 
     <!-- cart navbar Hiddeneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee  -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="Cart_offcanvasRightt" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="Cart_offcanvasRightt"
+        aria-labelledby="offcanvasRightLabel">
         <div style="border-bottom: 2px solid rgb(238, 238, 238)" class="offcanvas-header">
             <h6 class="offcanvas-title" id="offcanvasRightLabel">Giỏ hàng
                 (<strong>0 sản phẩm</strong>)
