@@ -52,6 +52,14 @@
     @yield('js-directly')
     <script>
         // new WOW().init();
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const successMessage = document.getElementById('success-message');
+                if (successMessage) {
+                    successMessage.style.display = 'none';
+                }
+            }, 5000); // 5000ms = 5s
+        });
     </script>
 </body>
 

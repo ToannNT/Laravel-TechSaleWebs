@@ -20,7 +20,10 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->date('birthdate')->nullable();
+            $table->string('gender')->nullable();
             $table->tinyInteger('role')->default(0); // 0 là người dùng, 1 là admin
+            $table->string('verification_token')->nullable();
+            $table->string('profile_picture')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

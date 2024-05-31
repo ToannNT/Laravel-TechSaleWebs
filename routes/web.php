@@ -61,7 +61,11 @@ Route::post('resetpassword', [ResetPasswordController::class, 'reset'])->name('r
 
 
 
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+Route::post('profile', [ProfileController::class, 'update'])->name('profile.update');
+
+
+
 Route::get('/order', [OrderController::class, 'index'])->name('order');
 Route::get('/orderdetail', [OrderDetailController::class, 'index'])->name('orderdetail');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');

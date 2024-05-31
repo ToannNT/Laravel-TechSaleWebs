@@ -23,7 +23,7 @@ class User extends Authenticatable
         // 'name',
         // 'email',
         // 'password',
-        'name', 'email', 'password', 'verification_token', 'phone', 'address', 'birthdate', 'role'
+        'name', 'email', 'password', 'verification_token', 'phone', 'address', 'birthdate', 'gender', 'role', 'profile_picture'
 
     ];
 
