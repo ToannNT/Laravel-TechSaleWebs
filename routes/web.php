@@ -14,6 +14,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\PaymentSuccessController;
 
@@ -28,9 +31,14 @@ use App\Http\Controllers\PaymentSuccessController;
 |
 */
 
+// Route::middleware(['auth', 'verified'])->group(function () {
+//     Route::get('/dashboard', [RegisterController::class, 'index'])->name('dashboard');
+
+// });
+
+
 
 Route::get('/', [HomeController::class, 'index'])->name('');
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/product', [ProductController::class, 'index'])->name('product');
 Route::get('/productdetail/{id}', [ProductDetailController::class, 'index'])->name('productdetail');
@@ -43,7 +51,13 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout.submit'
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
+//verify email
 Route::get('verify-email/{id}/{token}', [VerificationController::class, 'verify'])->name('verify-email');
+//forgot password
+Route::get('forgot-password', [ForgotPasswordController::class, 'index'])->name('forgot-password');
+Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forgot-password.submit');
+Route::get('resetpassword/{token}', [ResetPasswordController::class, 'index'])->name('password.reset');
+Route::post('resetpassword', [ResetPasswordController::class, 'reset'])->name('reset-password.submit');
 
 
 

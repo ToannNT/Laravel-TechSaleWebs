@@ -26,14 +26,26 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials, $request->remember)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/')->with('success', 'Đăng nhập thành công');
+            if (Auth::user()->email_verified_at) {
+                $request->session()->regenerate();
+                return redirect()->intended('/')->with('success', 'Đăng nhập thành công');
+            } else {
+                Auth::logout();
+
+                // return redirect()->intended('/login')->with('notauthentic', 'Tài khoản của bạn chưa được xác thực.');
+
+                return back()->withErrors([
+                    'notauthentic' => 'Tài khoản của bạn chưa được xác thực !!!',
+                ])->withInput();
+            }
         }
 
         return back()->withErrors([
             'email' => 'Thông tin đăng nhập không chính xác.',
         ])->withInput();
     }
+
+
 
     public function logout(Request $request)
     {
