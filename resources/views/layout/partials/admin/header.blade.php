@@ -22,20 +22,49 @@
         </div>
     </form>
     <!-- Navbar-->
-    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark" id="navbarDropdown" href="#" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">Settings</a></li>
-                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                <li>
-                    <hr class="dropdown-divider" />
-                </li>
-                <li><a class="dropdown-item" href="#!">Logout</a></li>
-            </ul>
-        </li>
-    </ul>
+    {{-- @if (Auth::check()) --}}
+    @if (session('admin'))
+        {{-- <p>Chào, {{ session('admin')->name }}</p> --}}
+        {{-- @endif --}}
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            {{-- @if (session('admin')) --}}
+            {{-- @endif --}}
+            <p class="mt-2">Chào, {{ session('admin')->name }}</p>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark" id="navbarDropdown" href="#" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user fa-fw"></i>
+                </a>
+
+                {{-- <span class="fs-6">{{ Auth::user()->name }}</span> --}}
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    {{-- <li><a class="dropdown-item" href="#!">Settings</a></li>
+                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li> --}}
+                    <form action="{{ route('adminlogout.submit') }}" method="POST">
+                        @csrf
+                        <li><button type="submit" class="dropdown-item">Đăng xuất</button></li>
+                    </form>
+                </ul>
+
+            </li>
+        </ul>
+    @else
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark" id="navbarDropdown" href="#" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user fa-fw"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a href="{{ route('admin.login') }}" type="submit" class="dropdown-item">Đăng nhập</a></li>
+                </ul>
+
+            </li>
+        </ul>
+    @endif
 </nav>
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">

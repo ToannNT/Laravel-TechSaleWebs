@@ -1,5 +1,10 @@
 @extends('layout.adminlayout')
 @section('content')
+    @if (session('successUpdateProduct'))
+        <div class="position-fixed top-20 end-0 p-3 " style="z-index: 10000">
+            <div id="success-message" class="alert alert-success">{{ session('successUpdateProduct') }}</div>
+        </div>
+    @endif
     <div class="container-fluid px-2">
         <div class="p-3 rounded border-0 my-3 shadow">
             <ol class="breadcrumb mb-0">

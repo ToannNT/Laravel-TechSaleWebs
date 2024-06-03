@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\testcontroller;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ContactController;
@@ -19,7 +18,6 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\PaymentSuccessController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -73,7 +71,13 @@ Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
 Route::get('/paymentsuccess', [PaymentSuccessController::class, 'index'])->name('paymentsuccess');
 
 
-Route::prefix('admin')->group(function () {
+// ADMIN 
+Route::get('admin/login', [\App\Http\Controllers\admin\LoginAdminController::class, 'index'])->name('admin.login');
+Route::post('admin/login', [\App\Http\Controllers\admin\LoginAdminController::class, 'login'])->name('admin.login.submit');
+Route::post('admin/logout', [\App\Http\Controllers\admin\LoginAdminController::class, 'logout'])->name('adminlogout.submit');
+
+//middleware route Admin 
+Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\admin\DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('products', \App\Http\Controllers\admin\ProductController::class);
 });

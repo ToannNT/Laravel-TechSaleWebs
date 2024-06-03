@@ -32,8 +32,6 @@ class LoginController extends Controller
             } else {
                 Auth::logout();
 
-                // return redirect()->intended('/login')->with('notauthentic', 'Tài khoản của bạn chưa được xác thực.');
-
                 return back()->withErrors([
                     'notauthentic' => 'Tài khoản của bạn chưa được xác thực !!!',
                 ])->withInput();
@@ -50,10 +48,8 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
         return redirect('/');
     }
 }

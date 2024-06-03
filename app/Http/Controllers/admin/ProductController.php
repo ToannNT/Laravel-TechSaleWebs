@@ -55,13 +55,11 @@ class ProductController extends Controller
 
         // Lưu hình ảnh
         foreach ($request->file('images') as $image) {
-            // $filename = time() . '_' . $image->getClientOriginalName();
-            // $path = $image->storeAs('products', $filename, 'public');
-
-            $path = $image->store('products', 'public');
+            $filename = time() . '_' . $image->getClientOriginalName();
+            $path = $image->storeAs('', $filename, 'product_images');
             Image::create([
                 'product_id' => $product->id,
-                'url' => $path,
+                'url' => 'images/products/' . $filename,
             ]);
         }
 
@@ -139,7 +137,8 @@ class ProductController extends Controller
             foreach ($request->input('delete_images') as $imageUrl) {
                 $image = $product->images()->where('url', $imageUrl)->first();
                 if ($image) {
-                    Storage::disk('public')->delete($imageUrl);
+                    // Xóa tệp ảnh từ thư mục lưu trữ
+                    Storage::disk('product_images')->delete(basename($imageUrl));
                     $image->delete();
                 }
             }
@@ -148,12 +147,14 @@ class ProductController extends Controller
         // Add new images
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('products', 'public');
-                $product->images()->create(['url' => $path]);
+                $filename = time() . '_' . $image->getClientOriginalName();
+                $path = $image->storeAs('', $filename, 'product_images');
+
+                $product->images()->create(['url' => 'images/products/' . $filename]);
             }
         }
 
-        return redirect()->route('products.index')->with('success', 'Product updated successfully');
+        return back()->with('successUpdateProduct', 'Product updated successfully');
     }
 
     /**
@@ -162,20 +163,14 @@ class ProductController extends Controller
     // default là string $id
     public function destroy(Product $product)
     {
-
         // Delete images from product storage
         foreach ($product->images as $image) {
-            Storage::disk('public')->delete($image);
+            // Xóa tệp ảnh từ thư mục lưu trữ
+            Storage::disk('product_images')->delete(basename($image->url));
             $image->delete();
         }
-
-        // Delete Color from product storage
         $product->colors()->delete();
-
-        // Delete Product
-
         $product->delete();
-
 
         return redirect()->route('products.index')->with('success', 'Sản phẩm đã được xóa thành công');
     }
