@@ -80,6 +80,7 @@ Route::post('admin/logout', [\App\Http\Controllers\admin\LoginAdminController::c
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\admin\DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('products', \App\Http\Controllers\admin\ProductController::class);
+    Route::resource('users', \App\Http\Controllers\admin\UsersController::class);
 });
 
 // Route::prefix('admin')->name('admin.')->namespace('Admin')->middleware(['auth', 'admin'])->group(function () {

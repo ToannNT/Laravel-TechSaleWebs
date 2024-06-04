@@ -35,6 +35,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="{{ asset('admin/js/chart-area-demo.js') }}"></script>
     <script src="{{ asset('admin/js/chart-bar-demo.js') }}"></script>
+    <script>
+        // new WOW().init();
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const successMessage = document.getElementById('success-message');
+                if (successMessage) {
+                    successMessage.style.display = 'none';
+                }
+            }, 5000); // 5000ms = 5s
+        });
+    </script>
 </body>
 
 </html>

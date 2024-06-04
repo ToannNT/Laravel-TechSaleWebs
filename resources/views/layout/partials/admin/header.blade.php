@@ -121,11 +121,30 @@
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                             <a class="nav-link" href="layout-static.html">Thêm danh mục</a>
-                            <a class="nav-link" href="layout-static.html">Sửa danh mục</a>
                         </nav>
                     </div>
                     <!-- End collapse 2  -->
 
+                    <!-- USERS  -->
+                    <div class="sb-sidenav-menu-heading text-white opacity-75">Tài khoản</div>
+                    <a class="nav-link" href="{{ route('users.index') }}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        Danh sách tài khoản
+                    </a>
+                    <!-- collapse 2  -->
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                        data-bs-target="#collapseUsers" aria-expanded="false" aria-controls="collapseUsers">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Thao tác tài khoản
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseUsers" aria-labelledby="headingTwo"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link" href="layout-static.html">Thêm danh mục</a>
+                        </nav>
+                    </div>
+                    <!-- End USERS   -->
 
 
                     <!-- CATEGORY  -->
