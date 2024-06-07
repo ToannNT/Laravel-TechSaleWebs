@@ -78,16 +78,20 @@
                                     alt="" />
                             </div>
                             <div class="col-12 text-center mt-3">
-                                <h6>thanhtoan28744@gmail.com</h6>
+                                <h6>{{ $user->email }}</h6>
                             </div>
                         </div>
                     </div>
 
                     <div class="list-group mt-3">
-                        <a href="#!myaccount/12" class="list-group-item list-group-item-action">Hồ sơ cá nhân</a>
-                        <a href="#!order/12" class="list-group-item list-group-item-action fw-semibold"
+                        <a href="{{ route('profile') }}" class="list-group-item list-group-item-action">Hồ sơ cá nhân</a>
+                        <a href="{{ route('order') }}" class="list-group-item list-group-item-action fw-semibold"
                             aria-current="true">Đơn hàng</a>
-                        <a href="#" class="list-group-item list-group-item-action">Đăng xuất</a>
+                        <form action="{{ route('logout.submit') }}" method="post">
+                            @csrf
+                            <button type="submit" class="list-group-item list-group-item-action">Đăng
+                                xuất</button>
+                        </form>
                         <!-- <a href="#" class="list-group-item list-group-item-action">Chỉnh sửa</a> -->
                         <!-- <a class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled link item</a> -->
                     </div>
@@ -119,37 +123,28 @@
                                     <th style="font-size: 0.9rem" scope="col">Ngày đặt</th>
                                     <th style="font-size: 0.9rem" scope="col">Số lượng</th>
                                     <th style="font-size: 0.9rem" scope="col">Thành tiền</th>
-                                    <th style="font-size: 0.9rem" scope="col">Tình trạng</th>
                                     <th style="font-size: 0.9rem" class="" scope="col">Xem chi tiết</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="text-center" ng-repeat="dsorder in listOrder">
-                                    <td style="font-size: 0.9rem" scope="row">etech1592024</td>
-                                    <!-- <td style="width: 70px" class="tr_td">
-                                                    <a href="">
-                                                      <img class="img-sp w-100 object-fit-contain" src="../images/product/iPad10WiFi_2.webp" alt="" />
-                                                    </a>
-                                                  </td> -->
-                                    <!-- <td style="font-size: 0.9rem" class="tr_td">Đồng hồ thông minh Apple Watch Ultra GPS</td> -->
-                                    <td style="font-size: 0.9rem" class="tr_td">15/05/2024</td>
-                                    <!-- <td style="font-size: 0.9rem" class="tr_td">VYXWG2</td> -->
-                                    <td style="font-size: 0.9rem" class="tr_td">3</td>
-                                    <td style="font-size: 0.9rem" class="tr_td">500.000đ</td>
+                                @foreach ($listBillByUser as $index => $item)
+                                    <tr class="text-center">
+                                        <td style="font-size: 0.9rem" scope="row">{{ $item->ma_hoadon }}</td>
+                                        <td style="font-size: 0.9rem" class="tr_td">
+                                            {{ $item->created_at->format('d-m-Y') }}</td>
+                                        <!-- <td style="font-size: 0.9rem" class="tr_td">VYXWG2</td> -->
+                                        <td style="font-size: 0.9rem" class="tr_td">3</td>
+                                        <td style="font-size: 0.9rem" class="tr_td">
+                                            {{ number_format($item->tong, 0, ',', '.') }}đ</td>
+                                        <!-- <td style="font-size: 0.9rem" class="tr_td"><span style="color: #5273f9; font-weight: bold" href="#">Đang giao</span></td> -->
+                                        <td>
+                                            <a style="font-size: 0.9rem" class="text-decoration-none text-secondary"
+                                                href="{{ route('orderdetail', ['bill_id' => $item->id]) }}">Xem</a>
+                                        </td>
 
-                                    <td ng-model="status" style="font-size: 0.9rem" class="tr_td">
-                                        <span style="color: green; font-weight: bold">
-                                            Đã giao
-                                        </span>
-                                        {{-- <span
-                                            ng-style="{'color': dsorder.status === 1 ? 'red' : (dsorder.status === 2 ? 'orange' : (dsorder.status === 3 ? 'green' : 'black'))}">
-                                            {{ dsorder . status === 1 ? 'Chờ xử lí' : (dsorder . status === 2 ? 'Đang giao' : (dsorder . status === 3 ? 'Đã giao' : 'Không xác định')) }}
-                                        </span> --}}
-                                    </td>
-                                    <!-- <td style="font-size: 0.9rem" class="tr_td"><span style="color: #5273f9; font-weight: bold" href="#">Đang giao</span></td> -->
-                                    <td><a style="font-size: 0.9rem" class="text-decoration-none text-secondary"
-                                            href="#!detailorder/etech154123s">Xem</a></td>
-                                </tr>
+                                    </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>

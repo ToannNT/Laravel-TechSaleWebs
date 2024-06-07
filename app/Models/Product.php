@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 class Product extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'catalog_id',
         'ten',
@@ -31,7 +32,10 @@ class Product extends Model
         });
     }
 
-
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'product_id');
+    }
     public function catalog()
     {
         return $this->belongsTo(Catalog::class, 'catalog_id');

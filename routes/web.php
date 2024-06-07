@@ -1,23 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\VerificationController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\PaymentSuccessController;
+
+use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,19 +57,26 @@ Route::get('forgot-password', [ForgotPasswordController::class, 'index'])->name(
 Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forgot-password.submit');
 Route::get('resetpassword/{token}', [ResetPasswordController::class, 'index'])->name('password.reset');
 Route::post('resetpassword', [ResetPasswordController::class, 'reset'])->name('reset-password.submit');
-
-
-
+//Profile
 Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 Route::post('profile', [ProfileController::class, 'update'])->name('profile.update');
 
 
 
 Route::get('/order', [OrderController::class, 'index'])->name('order');
-Route::get('/orderdetail', [OrderDetailController::class, 'index'])->name('orderdetail');
+Route::get('/orderdetail/{bill_id}', [OrderDetailController::class, 'index'])->name('orderdetail');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
+// Có kiểm tra người dùng 
+// Route::post('/cart/add', [CartController::class, 'addtocart'])->middleware('auth')->name('addcart.submit');
+Route::post('/cart/add', [CartController::class, 'addtocart'])->name('addcart.submit');
+Route::post('/cart/update-status', [CartController::class, 'updateStatus'])->name('cart.update-status');
+Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])->name('cart.update-quantity');
+Route::post('/cart/delete-item', [CartController::class, 'deleteItem'])->name('cart.delete-item');
+
+//payment
 Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
-Route::get('/paymentsuccess', [PaymentSuccessController::class, 'index'])->name('paymentsuccess');
+Route::get('paymentsuccess/{ma_hd}', [PaymentSuccessController::class, 'index'])->name('paymentsuccess');
+Route::post('/payment', [BillController::class, 'processPayment'])->name('payment.submit');
 
 
 // ADMIN 

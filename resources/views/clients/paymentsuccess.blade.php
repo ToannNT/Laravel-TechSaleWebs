@@ -1,6 +1,11 @@
 {{-- @extends('layout.clientlayout') --}}
 @extends('layout.clientlayout')
 @section('content')
+    @if (session('success'))
+        <div class="position-fixed top-20 end-0 p-3 " style="z-index: 10000">
+            <div id="success-message" class="alert alert-success">{{ session('success') }}</div>
+        </div>
+    @endif
     <main>
         <!-- </nav> -->
         <nav class="d-none d-lg-block border-top border-bottom">
@@ -67,9 +72,9 @@
         </section>
 
         <div class="products-card container mt-4">
-            <div class="row g-4 text-center">
+            <div class="d-flex justify-content-center">
                 <!-- <h4>Thông tin thanh toán</h4> -->
-                <div class="products-card-right col-md-6">
+                <div class="products-card-right col-md-6 text-center">
                     <div class="card rounded-2 border-0" style="background-color: rgb(246, 246, 246)">
                         <div class="card-body">
                             <h5 class="card-tittle text-center">
@@ -78,12 +83,33 @@
                                     src="{{ asset('clients/images/logo/status_success.png') }}" alt="" />
                             </h5>
                             <ul class="list-group">
-                                <li class="list-group-item border-0">Mã đơn hàng: <strong>etech7504</strong></li>
-                                <li class="list-group-item border-0">Ngày đặt hàng: <strong>15-05-2024</strong></li>
-                                <li class="list-group-item border-0">Tồng tiển: <strong>12,590,000đ</strong></li>
+                                <li class="list-group-item border-0">Mã đơn hàng:
+                                    <strong>{{ $billPaymentSuccess->ma_hoadon }}</strong>
+                                </li>
+                                <li class="list-group-item border-0">Ngày đặt hàng:
+                                    <strong>{{ $billPaymentSuccess->created_at->format('d-m-Y') }}</strong>
+                                </li>
+                                <li class="list-group-item border-0">Tồng tiển:
+                                    <strong>{{ number_format($billPaymentSuccess->total, 0, ',', '.') }}đ</strong>
+                                </li>
                                 <li class="list-group-item border-0">
                                     Phương thức thanh toán:
-                                    <strong>Thanh toán khi nhận hàng</strong>
+                                    <strong>
+                                        @if ($billPaymentSuccess->pttt == 0)
+                                            Thanh toán khi nhận hàng
+                                        @elseif($billPaymentSuccess->pttt == 1)
+                                            Thanh toán bằng thẻ ngân hàng
+                                        @elseif($billPaymentSuccess->pttt == 2)
+                                            Thanh toán bằng MoMo
+                                        @else
+                                            Không xác định
+                                        @endif
+                                    </strong>
+                                    {{-- <strong> {{ orderInfor[0].pttt == 1 ? 'Thanh toán khi nhận hàng' : (orderInfor[0].pttt == 2 ? 'Thanh toán bằng thẻ ngân hàng' : (orderInfor[0].pttt == 3 ? 'Thanh toán bằng MoMo' : 'Không xác định')) }}</strong> --}}
+                                </li>
+                                <li class="list-group-item border-0">
+                                    {{-- Chi tiết đơn hàng: --}}
+                                    <a class="text-black fw-bold" href="#">Xem chi tiết đơn hàng</a>
 
                                     {{-- <strong> {{ orderInfor[0].pttt == 1 ? 'Thanh toán khi nhận hàng' : (orderInfor[0].pttt == 2 ? 'Thanh toán bằng thẻ ngân hàng' : (orderInfor[0].pttt == 3 ? 'Thanh toán bằng MoMo' : 'Không xác định')) }}</strong> --}}
                                 </li>
@@ -92,43 +118,6 @@
                     </div>
                 </div>
 
-                <div class="products-card__list col-md-6">
-                    <table class="table">
-                        <thead>
-                            <tr class="p-4">
-                                <th style="background-color: rgb(246, 246, 246); width: 55%" class="text-start">Sản phẩm
-                                </th>
-                                <th style="background-color: rgb(246, 246, 246); width: 20%" class="col-3 text-center">Số
-                                    lượng</th>
-                                <th style="background-color: rgb(246, 246, 246); width: 20%" class="col-3 text-center">Giá
-                                </th>
-                                <th style="background-color: rgb(246, 246, 246); width: 35%" class="col-3 text-end">Tổng phụ
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="dssp in orderInfor[0].products_order">
-                                <td style="background-color: rgb(246, 246, 246); width: 55%" class="col-6 text-start">iPad
-                                    mini 6 WiFi 64GB | Chính hãng Apple Việt Nam</td>
-                                <td style="background-color: rgb(246, 246, 246); width: 20%" class="text-center">×1</td>
-                                <td style="background-color: rgb(246, 246, 246); width: 35%" class="text-end">12,590,000₫
-                                </td>
-                                <td ng-if="dssp.reducedPrice" style="background-color: rgb(246, 246, 246); width: 35%"
-                                    class="text-end">12,590,000₫</td>
-                                {{-- <td ng-if="!dssp.reducedPrice" style="background-color: rgb(246, 246, 246); width: 35%"
-                                    class="text-end">12,590,000₫
-                                </td> --}}
-                            </tr>
-                        </tbody>
-                        <footer>
-                            <tr>
-                                <th style="background-color: rgb(246, 246, 246); width: 50%" class="text-start">Tổng</th>
-                                <th colspan="3" style="background-color: rgb(246, 246, 246); width: 50%"
-                                    class="col-3 text-end">12,590,000₫</th>
-                            </tr>
-                        </footer>
-                    </table>
-                </div>
             </div>
         </div>
     </main>

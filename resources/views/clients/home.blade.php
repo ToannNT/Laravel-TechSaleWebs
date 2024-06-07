@@ -284,17 +284,16 @@
                         <div class="card card-product position-relative">
 
                             @if ($product->sold > 100)
-                                <span style="top: -5%; left: -9%" class="position-absolute badge  p-2 ">
-                                    {{-- New --}}
-                                    <img style="width: 90px" class="img-fluid"
-                                        src="{{ asset('clients/images/logo/hot-deal-2.png') }}" alt="">
+                                <span style="top: 0%; left: 0%"
+                                    class="position-absolute text-bg-danger badge rounded-1  p-2 ">
+                                    Hot
                                 </span>
                             @endif
 
-                            @if ($product->created_at->diffInDays(now()) <= 30)
-                                <span style="top: -4%; right: -5%" class="position-absolute badge rounded-1 p-2">
-                                    <img style="width: 50px" class="img-fluid"
-                                        src="{{ asset('clients/images/logo/hot-new-2.png') }}" alt="">
+                            @if ($product->giamgia > 0)
+                                <span style="top: 0%; right: 0%"
+                                    class="position-absolute badge text-bg-warning rounded-1 p-2">
+                                    -50%
                                 </span>
                             @endif
 
@@ -311,6 +310,10 @@
                                     class="card-product__tittle card-title text-decoration-none fw-medium">
                                     {{ $product->ten }}
                                 </a>
+                                <p class="card-product__quantity">Có sẵn: <span
+                                        style="letter-spacing: 5px; font-weight: 600; font-size: 1.1rem"
+                                        class="text-danger">{{ $product->quantity }}</span>
+                                </p>
                                 <p class="card-product__star">
                                     <i class="fa-solid fa-star" style="color: #bcbec2"></i>
                                     <i class="fa-solid fa-star" style="color: #bcbec2"></i>
@@ -318,14 +321,10 @@
                                     <i class="fa-solid fa-star" style="color: #bcbec2"></i>
                                     <i class="fa-solid fa-star" style="color: #bcbec2"></i>
                                 </p>
-                                <p class="card-product__quantity">Có sẵn: <span
-                                        style="letter-spacing: 5px; font-weight: 600; font-size: 1.1rem"
-                                        class="text-danger">{{ $product->quantity }}/145</span>
-                                </p>
                                 <hr class="border border-danger border-2 opacity-100" />
 
                                 @if ($product->giamgia > 0)
-                                    <p class="mt-3">
+                                    <p class="mt-3 mb-0">
                                         <span class="card-price fw-medium fs-5">
                                             {{ number_format($product->giamgia, 0, ',', ',') }}đ
                                         </span>
@@ -335,27 +334,12 @@
                                         </del>
                                     </p>
                                 @else
-                                    <p class="mt-3">
+                                    <p class="mt-3 mb-0">
                                         <span
                                             class="card-price fw-medium fs-5">{{ number_format($product->gia, 0, ',', ',') }}đ</span>
                                         &nbsp;
                                     </p>
                                 @endif
-                                {{-- <p class="mt-3">
-                                    <span class="card-price fw-medium fs-5">1,150,000₫</span> &nbsp;
-                                    <del class="opacity-50"> 1,505,000₫ </del>
-                                </p> --}}
-                                <div class="card-product__btn">
-                                    <div class="row g-2">
-                                        <div class="col-6">
-                                            <a href="#" class="col-12 btn btn-warning">Mua</a>
-                                        </div>
-                                        <div class="col-6">
-                                            <a href="#" class="col-12 btn btn-danger">Thêm</a>
-                                        </div>
-                                        <!-- <a href="#" class="col-6 btn btn-primary">Thêm</a> -->
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

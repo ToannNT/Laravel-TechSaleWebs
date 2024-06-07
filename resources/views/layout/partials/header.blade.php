@@ -1,3 +1,21 @@
+@php
+    use App\Models\Cart;
+    $user = Auth::user();
+    $totalProductHeader = 0;
+    if ($user) {
+        $listProductById = Cart::getProductCartByUser($user->id)->get();
+        $countProductHeader = $listProductById->count();
+        foreach ($listProductById as $key => $value) {
+            $countItem = $key++;
+            $totalProductHeader += $value->gia * $value->soluong;
+        }
+    } else {
+        $countProduct = 0;
+        $countProductHeader = 0;
+        $listProductById = [];
+    }
+@endphp
+
 <div class="container" style="margin-bottom: 75px">
     <nav style="height: 75px" class="navbar navbar-expand-lg bg-white fixed-top">
         <div class="container">
@@ -82,8 +100,8 @@
                                 <span class="fs-6">{{ Auth::user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('login') }}">Hồ sơ</a></li>
-                                <li><a class="dropdown-item" href="{{ route('register') }}">Đơn hàng</a></li>
+                                <li><a class="dropdown-item" href="{{ route('profile') }}">Hồ sơ</a></li>
+                                <li><a class="dropdown-item" href="{{ route('order') }}">Đơn hàng</a></li>
                                 <form action="{{ route('logout.submit') }}" method="POST">
                                     @csrf
                                     <li><button type="submit" class="dropdown-item">Đăng xuất</button></li>
@@ -109,6 +127,7 @@
                     </div>
                 </li>
 
+
                 <li class="nav-item">
                     <a class="nav-link p-3 position-relative" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#Cart_offcanvasRightt" aria-controls="Cart_offcanvasRightt">
@@ -116,7 +135,7 @@
                             <i class="fs-4 text-black fa-solid fa-cart-plus fa-shake"></i>
                             <span
                                 class="position-absolute top-75 start-100 translate-middle badge rounded-pill bg-warning">
-                                0+
+                                {{ $countProductHeader }}+
                             </span>
                         </i>
                     </a>
@@ -142,40 +161,75 @@
         aria-labelledby="offcanvasRightLabel">
         <div style="border-bottom: 2px solid rgb(238, 238, 238)" class="offcanvas-header">
             <h6 class="offcanvas-title" id="offcanvasRightLabel">Giỏ hàng
-                (<strong>0 sản phẩm</strong>)
+                (<strong>{{ $countProductHeader }} sản phẩm</strong>)
             </h6>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <div class="card mb-3 border-bottom border-0 rounded-0" style="max-width: 540px">
-                <div class="row g-0">
-                    <div class="col-md-4" style="padding: 16px">
+            <div class="card mb-3 border-bottom border-0 rounded-0 ng-scope" style="max-width: 540px">
+                @foreach ($listProductById as $index => $product)
+                    <div class="row g-0">
+                        <div class="col-4" style="padding: 16px">
+                            <img style="height: 100px" src="{{ asset($product->hinh) }}"
+                                class="img-fluid object-fit-cover" alt="..." />
+                        </div>
+                        <div class="col-6">
+                            <div class="card-body">
+                                <h5 style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden"
+                                    class="fs-6 card-title ng-binding">{{ $product->ten }}</h5>
+                                <p class="card-text">Giá: {{ number_format($product->gia, 0, ',', ',') }} ₫.</p>
+                                </p>
+                                <div class="quantity">
+                                    <!-- <input type="button" value="-" class="minus btn rounded-0 m-0" style="background-color: #e3e3e3" /> -->
+                                    <button type="button" class="btn rounded m-0"
+                                        style="background-color: #e3e3e3">-</button>
+                                    <input class="btn btn-warning rounded px-0 m-0" type="number" min="1"
+                                        max="500" value="{{ $product->soluong }}" />
+                                    <button type="button" class="btn rounded m-0"
+                                        style="background-color: #e3e3e3">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="fw-medium fs-4 btn btn-close-white rounded m-0">x</button>
+                        </div>
+                    </div>
+                @endforeach
+
+                {{-- <div class="row g-0">
+                    <div class="col-4" style="padding: 16px">
                         <img style="height: 100px" src="{{ asset('clients/images/prod_2.png') }}"
                             class="img-fluid object-fit-cover" alt="..." />
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-6">
                         <div class="card-body">
                             <h5 style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden"
-                                class="card-title">Meta Quest 2 128 GB All-in-One VR System Blazing-fast processor.
-                            </h5>
-                            <p class="card-text">Đơn giá 925,000 ₫.</p>
+                                class="fs-6 card-title ng-binding">Meta Quest 2 128 GB All-in-One VRdsadasdas</h5>
+                            <p class="card-text">Đơn giá 500.000₫.</p>
+                            </p>
                             <div class="quantity">
-                                <input type="button" value="-" class="minus btn rounded-0 m-0"
-                                    style="background-color: #e3e3e3" />
-                                <input class="btn btn-warning rounded-0 px-1" type="number" min="0"
-                                    max="500" value="1" value="" />
-                                <input type="button" value="+" class="plus m-0 btn rounded-0"
-                                    style="background-color: #e3e3e3" />
+                                <!-- <input type="button" value="-" class="minus btn rounded-0 m-0" style="background-color: #e3e3e3" /> -->
+                                <button ng-click="giamSoLuongItem(dsCart)" type="button" class="btn rounded m-0"
+                                    style="background-color: #e3e3e3">-</button>
+                                <input class="btn btn-warning rounded px-1" type="number" min="1"
+                                    max="500" value="3" value="" />
+                                <button ng-click="tangSoLuongItem(dsCart)" type="button" class="btn rounded m-0"
+                                    style="background-color: #e3e3e3">+</button>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div class="col-2">
+                        <button ng-click="deleItemCart(dsCart.id)" type="button"
+                            class="fw-medium fs-4 btn btn-close-white rounded m-0">x</button>
+                    </div>
+                </div> --}}
+
             </div>
 
             <div class="total">
                 <span class="fs-6 total-title fs-5">Tổng phụ : </span>
-                <span class="total-Price-amount amount fs-6 fw-semibold"> 150.000đ<span
-                        class="total-Price-currencySymbol">₫</span> </span>
+                <span class="total-Price-amount amount fs-6 fw-semibold">
+                    {{ number_format($totalProductHeader) }}đ</span>
             </div>
             <div class="row g-3 mt-2 mini-cart">
                 <div class="col-6">

@@ -74,12 +74,31 @@
                         <div class="card-body">
                             <h5 class="card-tittle text-start">Thông tin chi tiết đơn hàng</h5>
                             <ul class="list-group">
-                                <li class="list-group-item border-0 text-start">Mã đơn hàng: <strong>etech8178</strong></li>
-                                <li class="list-group-item border-0 text-start">Ngày đặt hàng: <strong>17-05-2024 </strong>
+                                <li class="list-group-item border-0 text-start">Thông tin người nhận:
+                                    <strong>{{ $informationDetailBill->ten_nguoidat }}
+                                        ,{{ $informationDetailBill->diachi_nguoidat }}
+                                        ,{{ $informationDetailBill->sdt_nguoidat }}</strong>
+                                </li>
+
+                                <li class="list-group-item border-0 text-start">Mã đơn hàng:
+                                    <strong>{{ $informationDetailBill->ma_hoadon }}</strong>
+                                </li>
+                                <li class="list-group-item border-0 text-start">Ngày đặt hàng:
+                                    <strong>{{ $informationDetailBill->created_at->format('d-m-Y') }} </strong>
                                 </li>
                                 <li class="list-group-item border-0 text-start">
                                     Phương thức thanh toán:
-                                    <strong> Thanh toán khi nhận hàng </strong>
+                                    @if ($informationDetailBill->pttt == 0)
+                                        <strong> Thanh toán khi nhận hàng </strong>
+                                    @elseif ($informationDetailBill->pttt == 1)
+                                        <span class="text-warning fw-bold">
+                                            Thẻ ngân hàng
+                                        </span>
+                                    @elseif ($informationDetailBill->pttt == 2)
+                                        <span class="text-success fw-bold">
+                                            MoMo
+                                        </span>
+                                    @endif
                                 </li>
                             </ul>
                         </div>
@@ -90,35 +109,54 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr class="">
-                                <th style="background-color: rgb(246, 246, 246)" class="text-start">Sản phẩm</th>
-                                <th style="background-color: rgb(246, 246, 246)" class="text-start">Hình</th>
-                                <th style="background-color: rgb(246, 246, 246)" class="text-center">Số lượng</th>
-                                <th style="background-color: rgb(246, 246, 246)" class="text-center">Giá</th>
-                                <th style="background-color: rgb(246, 246, 246)" class="text-end">Trạng thái</th>
+                                <th style="background-color: rgb(246, 246, 246)">Mã đơn hàng</th>
+                                <th style="background-color: rgb(246, 246, 246)">Sản phẩm</th>
+                                <th style="background-color: rgb(246, 246, 246)">Hình</th>
+                                <th style="background-color: rgb(246, 246, 246)">Màu</th>
+                                <th style="background-color: rgb(246, 246, 246)">Số lượng</th>
+                                <th style="background-color: rgb(246, 246, 246)">Giá</th>
+                                <th style="background-color: rgb(246, 246, 246)">Trạng thái</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="dssp in orderInfor[0].products_order">
-                                <td class="text-start">Máy Ảnh FUJI INSTAX MINI 8</td>
-                                <td class="text-start">
-                                    <img style="width: 70px"
-                                        src="{{ asset('clients/images/product/fuji-instax-mini8_1.jpg') }}"
-                                        alt="" />
-                                </td>
-                                <td class="text-center">×3</td>
-                                <td class="text-end">1,990,000₫</td>
+                            @foreach ($listOrderdByUser as $key => $item)
+                                <tr>
+                                    <td class="align-middle">{{ $item->madh }}</td>
+                                    <td class="align-middle">{{ $item->ten }}</td>
+                                    <td class="d-flex justify-content-center">
+                                        <div style="width: 100px">
+                                            <img style="width: 100%; object-git: cover;" src="{{ asset($item->hinh) }}"
+                                                alt="" />
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center">{{ $item->mau }}</td>
+                                    <td class="align-middle text-center">×{{ $item->soluong }}</td>
+                                    <td class="align-middle text-center">{{ number_format($item->gia, 0, ',', '.') }}₫</td>
 
-                                <td style="font-size: 0.9rem" class="tr_td">
-                                    <span style="color: red">
-                                        Chờ xử lí
-                                    </span>
-                                </td>
-                            </tr>
+                                    <td class="align-middle text-center" style="font-size: 0.9rem">
+                                        @if ($item->status == 0)
+                                            <span class="color-red fw-bold">
+                                                Đang xử lí
+                                            </span>
+                                        @elseif ($item->status == 1)
+                                            <span class="text-warning fw-bold">
+                                                Đang vận chuyển
+                                            </span>
+                                        @elseif ($item->status == 2)
+                                            <span class="text-success fw-bold">
+                                                Đã nhận được hàng
+                                            </span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+
                         </tbody>
                         <footer>
                             <tr>
-                                <th class="text-start">Tổng</th>
-                                <th colspan="4" class="text-end">21,560,000₫</th>
+                                <th class="align-middle text-center">Tổng</th>
+                                <th colspan="6" class="text-center">
+                                    {{ number_format($informationDetailBill->total, 0, ',', '.') }}₫</th>
                             </tr>
                         </footer>
                     </table>

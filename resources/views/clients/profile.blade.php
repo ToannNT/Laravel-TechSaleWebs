@@ -47,10 +47,16 @@
                     </div>
 
                     <div class="list-group mt-3">
-                        <a href="#!myaccount/12" class="fw-semibold list-group-item list-group-item-action"
-                            aria-current="true">Hồ sơ cá nhân</a>
-                        <a href="#!order/12" class="list-group-item list-group-item-action">Đơn hàng</a>
-                        <a href="#" class="list-group-item list-group-item-action">Đăng xuất</a>
+                        <a href="{{ route('profile') }}" class="fw-semibold list-group-item list-group-item-action">
+                            Hồ sơ cá nhân</a>
+                        <a href="{{ route('order') }}" class="list-group-item list-group-item-action">Đơn hàng</a>
+                        {{-- <a href="#!order/12" class="list-group-item list-group-item-action">Đơn hàng</a> --}}
+                        {{-- <a href="#" class="list-group-item list-group-item-action">Đăng xuất</a> --}}
+                        {{-- <form action="{{ route('logout.submit') }}" method="post"> --}}
+                        {{-- @csrf --}}
+                        <a href="#" class="list-group-item list-group-item-action">Đăng
+                            xuất</a>
+                        {{-- </form> --}}
                     </div>
                 </div>
                 <div class="products-card__list col-md-9">

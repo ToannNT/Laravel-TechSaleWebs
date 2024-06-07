@@ -1,6 +1,11 @@
 {{-- @extends('layout.clientlayout') --}}
 @extends('layout.clientlayout')
 @section('content')
+    @if (session('successAddToCart'))
+        <div class="position-fixed top-20 end-0 p-3 " style="z-index: 10000">
+            <div id="success-message" class="alert alert-success">{{ session('successAddToCart') }}</div>
+        </div>
+    @endif
     <main>
         <style>
             .chose-productColor.active {
@@ -8,50 +13,36 @@
             }
         </style>
         <section class="banner_introduce bg-secondary-subtle p-4">
-            <div class="container">Trang chủ / Sản phẩm / Tai nghe AirPods Max</div>
+            <div class="container">Trang chủ / Sản phẩm / {{ $oneProduct->ten }}</div>
         </section>
-
-        <section class="container detail-product-wrapper mt-5">
+        <form action="{{ route('addcart.submit') }}" method="post" class="container detail-product-wrapper mt-5">
+            @csrf
+            @csrf
+            <input type="hidden" name="product_id" value="{{ $oneProduct->id }}">
+            <input type="hidden" name="gia" value="{{ $oneProduct->gia }}">
+            <input type="hidden" name="mau" id="selected_color" value="">
             <div class="row">
                 <div class="detail-product-wrapper__left col-12 col-sm-5">
-                    <div class="owl-carousel carousel-product__images owl-theme">
+                    <div class="slider-for">
                         @foreach ($oneProduct->images as $image)
                             <div class="item">
-                                <img style="max-height: 500px" class="p-4 w-100 img-fluid object-fit-contain"
+                                <img style="max-height: 500px" class="mb-3 w-100 img-fluid object-fit-contain"
                                     src="{{ $image->url }}" alt="" />
                             </div>
                         @endforeach
-
-                        {{-- <div class="item">
-                            <img style="max-height: 500px" class="w-100 img-fluid object-fit-contain"
-                                src="{{ $oneProduct->hinh }}" alt="" />
-                        </div>
-                        <div class="item">
-                            <img style="max-height: 500px" class="w-100 img-fluid object-fit-contain"
-                                src="{{ $oneProduct->hinh }}" alt="" />
-                        </div>
-                        <div class="item">
-                            <img style="max-height: 500px" class="w-100 img-fluid object-fit-contain"
-                                src="{{ $oneProduct->hinh }}" alt="" />
-                        </div> --}}
                     </div>
-                    <div class="g-2 row detail-product__images mt-1 ">
+                    <div class="slider-nav ">
                         @foreach ($oneProduct->images as $index => $image)
-                            <a class="item_thumb col text-white" href="#{{ $index }}">
+                            <div class="item">
+                                <img class="px-2 w-100 img-fluid object-fit-contain" src="{{ $image->url }}"
+                                    alt="" />
+                            </div>
+
+                            {{-- <a class="item_thumb col text-white" href="#{{ $index }}">
                                 <img class="w-100 img-fluid object-fit-contain" src="{{ asset('storage/' . $image->url) }}"
                                     alt="" />
-                            </a>
+                            </a> --}}
                         @endforeach
-                        {{-- <div class="owl-carousel carousel-related__products owl-theme">
-                            @foreach ($oneProduct->images as $index => $image)
-                                <div class="item">
-                                    <a class="item_thumb col-3 text-white" href="#{{ $index }}">
-                                        <img style="max-height: 110px" class="w-100 img-fluid object-fit-contain"
-                                            src="{{ $image->url }}" alt="" />
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div> --}}
                         {{-- <a class="item_thumb col-3 text-white" href="#0">
                             <img style="max-height: 110px" class="w-100 img-fluid object-fit-contain"
                                 src="{{ $oneProduct->hinh }}" alt="" />
@@ -69,43 +60,6 @@
                                 src="{{ $oneProduct->hinh }}" alt="" />
                         </a> --}}
                     </div>
-
-                    {{-- <div class="owl-carousel carousel-product__images owl-theme">
-                        <div class="item">
-                            <img style="max-height: 450px" class="p-4 w-100 img-fluid object-fit-contain"
-                                src="{{ asset('clients/images/product/airpodsmax_1.png') }}" alt="" />
-                        </div>
-                        <div class="item">
-                            <img style="max-height: 500px" class="w-100 img-fluid object-fit-contain"
-                                src="{{ asset('clients/images/product/airpodsmax_2.png') }}" alt="" />
-                        </div>
-                        <div class="item">
-                            <img style="max-height: 500px" class="w-100 img-fluid object-fit-contain"
-                                src="{{ asset('clients/images/product/airpodsmax_3.png') }}" alt="" />
-                        </div>
-                        <div class="item">
-                            <img style="max-height: 500px" class="w-100 img-fluid object-fit-contain"
-                                src="{{ asset('clients/images/product/airpodsmax_4.png') }}" alt="" />
-                        </div>
-                    </div>
-                    <div class="g-2 row detail-product__images mt-1">
-                        <a class="item_thumb col-3 text-white" href="#zero">
-                            <img style="max-height: 110px" class="w-100 img-fluid object-fit-contain"
-                                src="{{ asset('clients/images/product/airpodsmax_1.png') }}" alt="" />
-                        </a>
-                        <a class="item_thumb col-3 text-white" href="#two">
-                            <img style="max-height: 110px" class="w-100 img-fluid object-fit-contain"
-                                src="{{ asset('clients/images/product/airpodsmax_2.png') }}" alt="" />
-                        </a>
-                        <a class="item_thumb col-3 text-white" href="#three">
-                            <img style="max-height: 110px" class="w-100 img-fluid object-fit-contain"
-                                src="{{ asset('clients/images/product/airpodsmax_3.png') }}" alt="" />
-                        </a>
-                        <a class="item_thumb col-3 text-white" href="#four">
-                            <img style="max-height: 110px" class="w-100 img-fluid object-fit-contain"
-                                src="{{ asset('clients/images/product/airpodsmax_4.png') }}" alt="" />
-                        </a>
-                    </div> --}}
 
 
                 </div>
@@ -142,10 +96,14 @@
                     <div class="row g-1" style="flex-direction: unset">
                         @foreach ($oneProduct->colors as $index => $color)
                             <div class="col-2">
+                                <input type="radio" class="btn-check color-option" name="mau"
+                                    id="option{{ $index }}" value="{{ $color->color }}" autocomplete="off">
+                                {{-- 
                                 <input type="radio" class="btn-check " name="options" id="option{{ $index }}"
-                                    autocomplete="off">
+                                    autocomplete="off"> --}}
                                 <label class="btn btn-outline-secondary btn-sm w-100"
                                     for="option{{ $index }}">{{ $color->color }}</label>
+
                             </div>
                         @endforeach
                         {{-- <div class="col-2">
@@ -211,17 +169,24 @@
 
                     <!-- btn  -->
                     <div class="btn-product mb-3">
-                        <input class="btn bg-secondary-subtle col-2 col-sm-2 col-lg-1 py-2 rounded" type="text"
+                        {{-- <input class="btn bg-secondary-subtle col-2 col-sm-2 col-lg-1 py-2 rounded" type="text"
                             value="-" ng-click="decrementQuantity()" />
                         <!-- <input class="btn bg-secondary-subtle col-3 col-sm-3 col-lg-1 py-2 rounded" type="number" min="1" max="200" ng-model="valueQuantity" /> -->
                         <button class="btn bg-secondary-subtle col-3 col-sm-3 col-lg-1 py-2 rounded">1</button>
                         <input class="btn bg-secondary-subtle col-2 col-sm-2 col-lg-1 py-2 rounded" type="text"
-                            value="+" ng-click="incrementQuantity()" />
+                            value="+" ng-click="incrementQuantity()" /> --}}
+
+                        <input class="btn bg-secondary-subtle col-2 col-sm-2 col-lg-1 py-2 rounded" type="button"
+                            value="-" onclick="changeQuantity(-1)" />
+                        <input class="btn bg-secondary-subtle col-3 col-sm-3 col-lg-1 py-2 rounded text-center"
+                            type="number" id="quantity" name="soluong" value="1" min="1" />
+                        <input class="btn bg-secondary-subtle col-2 col-sm-2 col-lg-1 py-2 rounded" type="button"
+                            value="+" onclick="changeQuantity(1)" />
                     </div>
+
                     <div class="btn_buy">
-                        <input class="btn col-4 col-lg-3 py-2 btn-warning rounded" type="submmit" value="Mua ngay" />
-                        <input ng-click="addCartDetail(dsDetailPro)" class="btn btn-danger col-4 col-lg-3 py-2 rounded"
-                            type="submmit" value="Thêm giỏ hàng" />
+                        <input class="btn col-4 col-lg-3 py-2 btn-warning rounded" type="submit" value="Mua ngay" />
+                        <input class="btn btn-danger col-4 col-lg-3 py-2 rounded" type="submit" value="Thêm giỏ hàng" />
                     </div>
 
                     <p class="mt-3 fs-6">
@@ -231,7 +196,7 @@
                     </p>
                 </div>
             </div>
-        </section>
+        </form>
 
         <section class="detail-product__information container mt-5">
             <nav>
@@ -504,15 +469,6 @@
 
 @section('js-directly')
     <script>
-        // Sự kiện click trên thumb để chuyển slide trong carousel chính
-        //   var item = $(".carousel-product__images .item_thumb");
-        //   console.log(item);
-        $(".item_thumb").on("click", function(e) {
-            e.preventDefault();
-            var index = $(this).index();
-            $(".carousel-product__images").trigger("to.owl.carousel", index);
-        });
-
         $(document).ready(function() {
             $(".carousel-product__images").owlCarousel({
                 items: 1,
@@ -544,6 +500,39 @@
                         items: 4,
                     },
                 },
+            });
+        });
+
+        function changeQuantity(amount) {
+            let quantityInput = document.getElementById('quantity');
+            let currentQuantity = parseInt(quantityInput.value);
+            let newQuantity = currentQuantity + amount;
+            if (newQuantity > 0) {
+                quantityInput.value = newQuantity;
+            }
+        }
+
+        document.querySelectorAll('.color-option').forEach(option => {
+            option.addEventListener('change', function() {
+                document.getElementById('selected_color').value = this.value;
+            });
+        });
+        $(document).ready(function() {
+            $('.slider-for').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+                // fade: true,
+                asNavFor: '.slider-nav'
+            });
+            $('.slider-nav').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                asNavFor: '.slider-for',
+                dots: false,
+                centerMode: true,
+                focusOnSelect: true,
+                arrows: false,
             });
         });
     </script>
