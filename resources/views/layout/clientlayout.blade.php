@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trang chủ</title>
+    <title>@yield('tittle') </title>
+
     <link rel="stylesheet" href="{{ asset('clients/css/bootstrap.min.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/wowjs@1.1.3/css/libs/animate.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
@@ -52,6 +53,13 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     @yield('js-directly')
+
+    {{-- Axios get data  --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
+        integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('clients/js/app.js') }}"></script>
+
 
     <script>
         // new WOW().init();

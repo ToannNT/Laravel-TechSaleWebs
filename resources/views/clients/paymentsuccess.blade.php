@@ -109,7 +109,9 @@
                                 </li>
                                 <li class="list-group-item border-0">
                                     {{-- Chi tiết đơn hàng: --}}
-                                    <a class="text-black fw-bold" href="#">Xem chi tiết đơn hàng</a>
+                                    <a class="text-black fw-bold"
+                                        href="{{ route('orderdetail', $billPaymentSuccess->id) }}">Xem chi tiết đơn
+                                        hàng</a>
 
                                     {{-- <strong> {{ orderInfor[0].pttt == 1 ? 'Thanh toán khi nhận hàng' : (orderInfor[0].pttt == 2 ? 'Thanh toán bằng thẻ ngân hàng' : (orderInfor[0].pttt == 3 ? 'Thanh toán bằng MoMo' : 'Không xác định')) }}</strong> --}}
                                 </li>

@@ -103,7 +103,7 @@
                                     @if ($product->images->isNotEmpty())
                                         <td class="col-1">
                                             <img style="width: 70px" class="img-fluid object-fit-cover"
-                                                src="{{ $product->images->first()->url }}" alt="" />
+                                                src="{{ asset($product->images->first()->url) }}" alt="" />
                                         </td>
                                     @endif
 

@@ -2,45 +2,71 @@
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
-// Bar Chart Example
-var ctx = document.getElementById("myBarChart");
-var myLineChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ["January", "February", "March", "April", "May", "June"],
-    datasets: [{
-      label: "Revenue",
-      backgroundColor: "rgba(2,117,216,1)",
-      borderColor: "rgba(2,117,216,1)",
-      data: [4215, 5312, 6251, 7841, 9821, 14984],
-    }],
-  },
-  options: {
-    scales: {
-      xAxes: [{
-        time: {
-          unit: 'month'
-        },
-        gridLines: {
-          display: false
-        },
-        ticks: {
-          maxTicksLimit: 6
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          min: 0,
-          max: 15000,
-          maxTicksLimit: 5
-        },
-        gridLines: {
-          display: true
-        }
+// Function to fetch data and create the chart
+async function fetchBarChartData() {
+  try {
+    const response = await fetch('/admin/bar-data');
+    const data = await response.json();
+    createBarChart(data);
+  } catch (error) {
+    console.error('Error fetching bar chart data:', error);
+  }
+}
+
+// Function to create the Bar Chart
+function createBarChart(data) {
+  var ctx = document.getElementById("myBarChart");
+  var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: data.labels.map(month => `Month ${month}`),
+      datasets: [{
+        label: "Revenue",
+        backgroundColor: "rgba(2,117,216,1)",
+        borderColor: "rgba(2,117,216,1)",
+        data: data.revenue,
       }],
     },
-    legend: {
-      display: false
+    options: {
+      scales: {
+        xAxes: [{
+          time: {
+            unit: 'month'
+          },
+          gridLines: {
+            display: false
+          },
+          ticks: {
+            maxTicksLimit: 6
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            min: 0,
+            max: Math.max(...data.revenue) + 1000,
+            maxTicksLimit: 5,
+            callback: function (value, index, values) {
+              return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
+            }
+          },
+          gridLines: {
+            display: true
+          }
+        }],
+      },
+      legend: {
+        display: false
+      },
+      tooltips: {
+        callbacks: {
+          label: function (tooltipItem, chart) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(tooltipItem.yLabel);
+          }
+        }
+      }
     }
-  }
-});
+  });
+}
+
+// Fetch the data and create the chart
+fetchBarChartData();

@@ -119,7 +119,7 @@ class ProductController extends Controller
             'motachitiet' => $validated['motachitiet'],
         ]);
 
-        // Update colors
+        // Cập nhật hình
         $existingColors = array_filter($request->input('colors', []), function ($value) {
             return !is_null($value) && $value !== '';
         });
@@ -132,7 +132,7 @@ class ProductController extends Controller
             $product->colors()->create(['color' => $color]);
         }
 
-        // Delete old images
+        // Xóa hình cũ
         if ($request->has('delete_images')) {
             foreach ($request->input('delete_images') as $imageUrl) {
                 $image = $product->images()->where('url', $imageUrl)->first();

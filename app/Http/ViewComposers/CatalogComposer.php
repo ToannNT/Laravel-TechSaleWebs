@@ -10,7 +10,7 @@ class CatalogComposer
     public function compose(View $view)
     {
         // Lấy tất cả các catalog
-        $catalogs = Catalog::all();
+        $catalogs = Catalog::orderBy("stt", "asc")->get();
 
         // Ghi log dữ liệu của catalog
         // dd($catalogs);

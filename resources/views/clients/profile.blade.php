@@ -1,4 +1,5 @@
 @extends('layout.clientlayout')
+@section('tittle', 'Hồ sơ')
 @section('content')
     <main>
         <!-- ... -->
@@ -33,7 +34,7 @@
                         <div class="card-body row d-flex justify-content-center">
                             <div style="width: 100px; height: 100px;" class="col-12">
                                 <img style="border-radius: 5px;" class="w-100 h-100 object-fit-cover"
-                                    src="{{ $user->profile_picture ? asset('images/user/' . $user->profile_picture) : 'https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png' }}"
+                                    src="{{ $user->profile_picture ? asset('images/user/' . $user->profile_picture) : asset('images/user/defaultImageUser.png') }}"
                                     alt="" />
                             </div>
                             <div class="col-12 text-center mt-3">

@@ -1,4 +1,9 @@
 {{-- @extends('layout.clientlayout') --}}
+@php
+    use App\Models\Product;
+    // $countItemByCategory = Product->CountItemByCategories();
+@endphp
+
 @extends('layout.clientlayout')
 @section('content')
     <main class="container">
@@ -166,7 +171,56 @@
             </div>
             <div class="col-lg-7 polular_categories__right">
                 <div class="row g-4">
-                    <div class="col-lg-3">
+                    <div class="col-sm-6 col-md-3">
+                        <a href="#" class="w-100 btn btn-outline-danger border-0 shadow">
+                            <span class="rounded-5 bg-secondary-subtle p-3">
+                                <i class="fa-solid fa-computer-mouse my-4" style="color: #d73333"></i>
+                            </span>
+                            <h6 class="mb-1 mt-4">Máy tính</h6>
+                            <p class="">
+                                @php
+                                    echo $countItemByCategory = Product::countItemByCategory(1);
+                                @endphp
+                                sản phẩm</p>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <a href="#" class="w-100 btn btn-outline-danger border-0 shadow">
+                            <span class="rounded-5 bg-secondary-subtle p-3">
+                                <i class="fa-solid fa-computer-mouse my-4" style="color: #d73333"></i>
+                            </span>
+                            <h6 class="mb-1 mt-4">Chuột</h6>
+                            <p class="">2 sản phẩm</p>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <a href="#" class="w-100 btn btn-outline-danger border-0 shadow">
+                            <span class="rounded-5 bg-secondary-subtle p-3">
+                                <i class="fa-solid fa-computer-mouse my-4" style="color: #d73333"></i>
+                            </span>
+                            <h6 class="mb-1 mt-4">Kính thực tế ảo</h6>
+                            <p class="">2 sản phẩm</p>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <a href="#" class="w-100 btn btn-outline-danger border-0 shadow">
+                            <span class="rounded-5 bg-secondary-subtle p-3">
+                                <i class="fa-solid fa-computer-mouse my-4" style="color: #d73333"></i>
+                            </span>
+                            <h6 class="mb-1 mt-4">Điện thoại</h6>
+                            <p class="">2 sản phẩm</p>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <a href="#" class="w-100 btn btn-outline-danger border-0 shadow">
+                            <span class="rounded-5 bg-secondary-subtle p-3">
+                                <i class="fa-solid fa-computer-mouse my-4" style="color: #d73333"></i>
+                            </span>
+                            <h6 class="mb-1 mt-4">Smartwatch</h6>
+                            <p class="">2 sản phẩm</p>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
                         <a href="#" class="w-100 btn btn-outline-danger border-0 shadow">
                             <span class="rounded-5 bg-secondary-subtle p-3">
                                 <i class="fa-solid fa-computer-mouse my-4" style="color: #d73333"></i>
@@ -175,7 +229,7 @@
                             <p class="">2 sản phẩm</p>
                         </a>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-sm-6 col-md-3">
                         <a href="#" class="w-100 btn btn-outline-danger border-0 shadow">
                             <span class="rounded-5 bg-secondary-subtle p-3">
                                 <i class="fa-solid fa-computer-mouse my-4" style="color: #d73333"></i>
@@ -184,52 +238,7 @@
                             <p class="">2 sản phẩm</p>
                         </a>
                     </div>
-                    <div class="col-lg-3">
-                        <a href="#" class="w-100 btn btn-outline-danger border-0 shadow">
-                            <span class="rounded-5 bg-secondary-subtle p-3">
-                                <i class="fa-solid fa-computer-mouse my-4" style="color: #d73333"></i>
-                            </span>
-                            <h6 class="mb-1 mt-4">Chuột điều khiển</h6>
-                            <p class="">2 sản phẩm</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-3">
-                        <a href="#" class="w-100 btn btn-outline-danger border-0 shadow">
-                            <span class="rounded-5 bg-secondary-subtle p-3">
-                                <i class="fa-solid fa-computer-mouse my-4" style="color: #d73333"></i>
-                            </span>
-                            <h6 class="mb-1 mt-4">Chuột điều khiển</h6>
-                            <p class="">2 sản phẩm</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-3">
-                        <a href="#" class="w-100 btn btn-outline-danger border-0 shadow">
-                            <span class="rounded-5 bg-secondary-subtle p-3">
-                                <i class="fa-solid fa-computer-mouse my-4" style="color: #d73333"></i>
-                            </span>
-                            <h6 class="mb-1 mt-4">Chuột điều khiển</h6>
-                            <p class="">2 sản phẩm</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-3">
-                        <a href="#" class="w-100 btn btn-outline-danger border-0 shadow">
-                            <span class="rounded-5 bg-secondary-subtle p-3">
-                                <i class="fa-solid fa-computer-mouse my-4" style="color: #d73333"></i>
-                            </span>
-                            <h6 class="mb-1 mt-4">Chuột điều khiển</h6>
-                            <p class="">2 sản phẩm</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-3">
-                        <a href="#" class="w-100 btn btn-outline-danger border-0 shadow">
-                            <span class="rounded-5 bg-secondary-subtle p-3">
-                                <i class="fa-solid fa-computer-mouse my-4" style="color: #d73333"></i>
-                            </span>
-                            <h6 class="mb-1 mt-4">Chuột điều khiển</h6>
-                            <p class="">2 sản phẩm</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-3">
+                    <div class="col-sm-6 col-md-3">
                         <a href="#" class="w-100 btn btn-outline-danger border-0 shadow">
                             <span class="rounded-5 bg-secondary-subtle p-3">
                                 <i class="fa-solid fa-computer-mouse my-4" style="color: #d73333"></i>
@@ -296,12 +305,22 @@
                                     -50%
                                 </span>
                             @endif
-
                             @if ($product->images->isNotEmpty())
-                                <img src="{{ $product->images->first()->url }}" style="width: 100%; height: 20rem"
-                                    class="card-product__img card-img-top img-fluid object-fit-cover" alt="..." />
-                            @endif
+                                <a href="{{ route('productdetail', $product->id) }}">
 
+                                    <img src="{{ asset($product->images->first()->url) }}"
+                                        style="width: 100%; height: 20rem"
+                                        class="card-product__img card-img-top img-fluid object-fit-cover"
+                                        alt="..." />
+                                </a>
+                            @else
+                                <a href="{{ route('productdetail', $product->id) }}">
+
+                                    <img src="{{ asset('images/imageImage.webp') }}" style="width: 100%; height: 20rem"
+                                        class="card-product__img card-img-top img-fluid object-fit-cover"
+                                        alt="..." />
+                                </a>
+                            @endif
                             <div class="card-body">
                                 <p class="card-product_type mb-1" style="font-size: 14px;">{{ $product->catalog->ten_dm }}
                                 </p>
@@ -315,11 +334,11 @@
                                         class="text-danger">{{ $product->quantity }}</span>
                                 </p>
                                 <p class="card-product__star">
-                                    <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                    <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                    <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                    <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                    <i class="fa-solid fa-star" style="color: #bcbec2"></i>
+                                    <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                    <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                    <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                    <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                    <i class="fa-solid fa-star" style="color: #eaea14"></i>
                                 </p>
                                 <hr class="border border-danger border-2 opacity-100" />
 
@@ -361,11 +380,11 @@
                                 Sony PlayStation VR2 Approx. 110°, Communication​ With PS5
                             </a>
                             <p class="card-product__star">
-                                <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                <i class="fa-solid fa-star" style="color: #bcbec2"></i>
+                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
                             </p>
                             <p class="card-product__quantity">Có sẵn: <span
                                     style="letter-spacing: 5px; font-weight: 600; font-size: 1.1rem"
@@ -405,29 +424,39 @@
                 @foreach ($newProduct as $product)
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="card card-product position-relative">
-                            {{-- <span style="top: 1%; left: 2%" class="position-absolute badge rounded-1 p-2 bg-dark"> Sale
-                        </span> --}}
-                            @if ($product->sold > 100)
-                                <span style="top: -5%; left: -9%" class="position-absolute badge  p-2 ">
-                                    {{-- New --}}
-                                    <img style="width: 90px" class="img-fluid"
-                                        src="{{ asset('clients/images/logo/hot-deal-2.png') }}" alt="">
-                                </span>
-                            @endif
 
                             @if ($product->created_at->diffInDays(now()) <= 30)
-                                <span style="top: -4%; right: -5%" class="position-absolute badge rounded-1 p-2">
-                                    <img style="width: 50px" class="img-fluid"
-                                        src="{{ asset('clients/images/logo/hot-new-2.png') }}" alt="">
+                                <span style="top: 0%; left: 0%"
+                                    class="position-absolute text-bg-danger badge rounded-1  p-2 ">
+                                    Mới
                                 </span>
                             @endif
 
-                            {{-- {{ asset('storage/' . $image->url) }} --}}
-                            @if ($product->images->isNotEmpty())
-                                <img src="{{ 'storage/' . $product->images->first()->url }}"
-                                    style="width: 100%; height: 20rem"
-                                    class="card-product__img card-img-top img-fluid object-fit-cover" alt="..." />
+                            @if ($product->giamgia > 0)
+                                <span style="top: 0%; right: 0%"
+                                    class="position-absolute badge text-bg-warning rounded-1 p-2">
+                                    -50%
+                                </span>
                             @endif
+
+
+                            @if ($product->images->isNotEmpty())
+                                <a href="{{ route('productdetail', $product->id) }}">
+
+                                    <img src="{{ asset($product->images->first()->url) }}"
+                                        style="width: 100%; height: 20rem"
+                                        class="card-product__img card-img-top img-fluid object-fit-cover"
+                                        alt="..." />
+                                </a>
+                            @else
+                                <a href="{{ route('productdetail', $product->id) }}">
+
+                                    <img src="{{ asset('images/imageImage.webp') }}" style="width: 100%; height: 20rem"
+                                        class="card-product__img card-img-top img-fluid object-fit-cover"
+                                        alt="..." />
+                                </a>
+                            @endif
+
 
                             <div class="card-body">
                                 <p class="card-product_type mb-1" style="font-size: 14px;">
@@ -438,21 +467,21 @@
                                     class="card-product__tittle card-title text-decoration-none fw-medium">
                                     {{ $product->ten }}
                                 </a>
-                                <p class="card-product__star">
-                                    <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                    <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                    <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                    <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                    <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                </p>
                                 <p class="card-product__quantity">Có sẵn: <span
                                         style="letter-spacing: 5px; font-weight: 600; font-size: 1.1rem"
-                                        class="text-danger">{{ $product->quantity }}/145</span>
+                                        class="text-danger">{{ $product->quantity }}</span>
+                                </p>
+                                <p class="card-product__star">
+                                    <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                    <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                    <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                    <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                    <i class="fa-solid fa-star" style="color: #eaea14"></i>
                                 </p>
                                 <hr class="border border-danger border-2 opacity-100" />
 
                                 @if ($product->giamgia > 0)
-                                    <p class="mt-3">
+                                    <p class="mt-3 mb-0">
                                         <span class="card-price fw-medium fs-5">
                                             {{ number_format($product->giamgia, 0, ',', ',') }}đ
                                         </span>
@@ -462,28 +491,12 @@
                                         </del>
                                     </p>
                                 @else
-                                    <p class="mt-3">
+                                    <p class="mt-3 mb-0">
                                         <span
                                             class="card-price fw-medium fs-5">{{ number_format($product->gia, 0, ',', ',') }}đ</span>
                                         &nbsp;
                                     </p>
                                 @endif
-
-                                {{-- <p class="mt-3">
-                                    <span class="card-price fw-medium fs-5">1,150,000₫</span> &nbsp;
-                                    <del class="opacity-50"> 1,505,000₫ </del>
-                                </p> --}}
-                                <div class="card-product__btn">
-                                    <div class="row g-2">
-                                        <div class="col-6">
-                                            <a href="#" class="col-12 btn btn-warning">Mua</a>
-                                        </div>
-                                        <div class="col-6">
-                                            <a href="#" class="col-12 btn btn-danger">Thêm</a>
-                                        </div>
-                                        <!-- <a href="#" class="col-6 btn btn-primary">Thêm</a> -->
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -506,11 +519,11 @@
                                 Sony PlayStation VR2 Approx. 110°, Communication​ With PS5
                             </a>
                             <p class="card-product__star">
-                                <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                <i class="fa-solid fa-star" style="color: #bcbec2"></i>
+                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
                             </p>
                             <p class="card-product__quantity">Có sẵn: <span
                                     style="letter-spacing: 5px; font-weight: 600; font-size: 1.1rem"
@@ -536,11 +549,7 @@
                     </div>
                 </div> --}}
             </div>
-            <div class="col-12 text-center mt-3">
-                <a href="{{ route('product') }}" class="btn btn-danger shadow btn-lg">Xem tất cả <span class="ms-2"><i
-                            class="fa-solid fa-arrow-right" style="color: #ffffff"></i></span>
-                </a>
-            </div>
+
         </section>
         <section class="row banner_promosion bg-light my-5">
             <div class="col-12 position-relative d-flex justify-content-center align-items-center">
@@ -572,175 +581,124 @@
             <div class="col-lg-8 product-hot__right">
                 <div class="row g-4">
                     <div class="col-lg-6 product-hot__right-trend">
-                        <h2 class="mb-4 fw-medium">Sản phẩm nổi bật</h2>
+                        <h3 class="mb-4 fw-medium">Xem nhiều nhất</h3>
                         <hr class="border border-secondary-subtle border-1 opacity-25" />
-                        <a href="#" style="border: 1px solid rgb(234, 234, 234)"
-                            class="text-decoration-none card mb-3">
-                            <div class="row g-0">
-                                <div class="col-4 d-flex justify-content-center align-items-center">
-                                    <img src="{{ asset('clients/images/prod_1.png') }}" class="w-75 img-fluid p-2"
-                                        alt="..." />
-                                </div>
-                                <div class="col-8">
-                                    <div class="card-body">
-                                        <h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis"
-                                            class="card-title">Sony
-                                            PlayStation VR2 Approx. 110°, Communication​ with PS5</h5>
-                                        <p class="card-text m-0">
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                        </p>
-                                        <p>
-                                            <span class="card-price fw-medium fs-5">1,150,000₫</span> &nbsp;
-                                            <del class="opacity-50 text-warning"> 1,505,000₫ </del>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" style="border: 1px solid rgb(234, 234, 234)"
-                            class="text-decoration-none card mb-3">
-                            <div class="row g-0">
-                                <div class="col-4 d-flex justify-content-center align-items-center">
-                                    <img src="{{ asset('clients/images/prod_1.png') }}" class="w-75 img-fluid p-2"
-                                        alt="..." />
-                                </div>
-                                <div class="col-8">
-                                    <div class="card-body">
-                                        <h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis"
-                                            class="card-title">Sony
-                                            PlayStation VR2 Approx. 110°, Communication​ with PS5</h5>
-                                        <p class="card-text m-0">
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                        </p>
-                                        <p>
-                                            <span class="card-price fw-medium fs-5">1,150,000₫</span> &nbsp;
-                                            <del class="opacity-50 text-warning"> 1,505,000₫ </del>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                        <div id="interested-products"></div>
 
-                        <a href="#" style="border: 1px solid rgb(234, 234, 234)"
-                            class="text-decoration-none card mb-3">
-                            <div class="row g-0">
-                                <div class="col-4 d-flex justify-content-center align-items-center">
-                                    <img src="{{ asset('clients/images/prod_1.png') }}" class="w-75 img-fluid p-2"
-                                        alt="..." />
-                                </div>
-                                <div class="col-8">
-                                    <div class="card-body">
-                                        <h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis"
-                                            class="card-title">Sony
-                                            PlayStation VR2 Approx. 110°, Communication​ with PS5</h5>
-                                        <p class="card-text m-0">
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                        </p>
-                                        <p>
-                                            <span class="card-price fw-medium fs-5">1,150,000₫</span> &nbsp;
-                                            <del class="opacity-50 text-warning"> 1,505,000₫ </del>
-                                        </p>
+
+                        {{-- @foreach ($interestedProduct as $product)
+                            <a href="{{ route('productdetail', $product->id) }}"
+                                style="border: 1px solid rgb(234, 234, 234)" class="text-decoration-none card mb-3">
+                                @if ($product->view >= 100)
+                                    <span style="top: 5%; left: 5%"
+                                        class="position-absolute text-bg-danger badge rounded-1  p-2 ">
+                                        Hot
+                                    </span>
+                                @endif
+                                <div class="row g-0">
+
+                                    <div class="col-4 d-flex justify-content-center align-items-center">
+
+                                        @if ($product->images->isNotEmpty())
+                                            <img src="{{ asset($product->images->first()->url) }}"
+                                                class="w-75 img-fluid p-2" alt="..." />
+                                        @else
+                                            <img src="{{ asset('images/imageImage.webp') }}" class="w-75 img-fluid p-2"
+                                                alt="..." />
+                                        @endif
+
+
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="card-body">
+                                            <h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis"
+                                                class="card-title">{{ $product->ten }}</h5>
+                                            <p class="card-text m-0">
+                                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                            </p>
+                                            <p>
+
+                                            </p>
+                                            @if ($product->giamgia > 0)
+                                                <span
+                                                    class="card-price fw-medium fs-5">{{ number_format($product->giamgia, 0, ',', ',') }}₫</span>
+                                                &nbsp;
+                                                <del class="opacity-50 text-secondary">{{ number_format($product->gia, 0, ',', ',') }}₫
+                                                </del>
+                                            @else
+                                                <span
+                                                    class="card-price fw-medium fs-5">{{ number_format($product->gia, 0, ',', ',') }}₫</span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        @endforeach --}}
+
                     </div>
                     <div class="col-lg-6 product-hot__right-promotion">
-                        <h2 class="mb-4 fw-medium">Khuyến mãi</h2>
+                        <h3 class="mb-4 fw-medium">Khuyến mãi</h3>
                         <hr class="border border-secondary-subtle border-1 opacity-25" />
-                        <a href="#" style="border: 1px solid rgb(234, 234, 234)"
-                            class="text-decoration-none card mb-3">
-                            <div class="row g-0">
-                                <div class="col-4 d-flex justify-content-center align-items-center">
-                                    <img src="{{ asset('clients/images/prod_1.png') }}" class="w-75 img-fluid p-2"
-                                        alt="..." />
-                                </div>
-                                <div class="col-8">
-                                    <div class="card-body">
-                                        <h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis"
-                                            class="card-title">Sony
-                                            PlayStation VR2 Approx. 110°, Communication​ with PS5</h5>
-                                        <p class="card-text m-0">
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                        </p>
-                                        <p>
-                                            <span class="card-price fw-medium fs-5">1,150,000₫</span> &nbsp;
-                                            <del class="opacity-50 text-warning"> 1,505,000₫ </del>
-                                        </p>
+
+                        <div id="sale-products">
+
+                        </div>
+
+                        {{-- @foreach ($saleProduct as $product)
+                            <a href="{{ route('productdetail', $product->id) }}" class="text-decoration-none card mb-3">
+                                @if ($product->view >= 100)
+                                    <span style="top: 5%; left: 5%"
+                                        class="position-absolute text-bg-danger badge rounded-1  py-2 ">
+                                        Sale
+                                    </span>
+                                @endif
+                                <div class="row g-0">
+                                    <div class="col-4 d-flex justify-content-center align-items-center">
+
+                                        @if ($product->images->isNotEmpty())
+                                            <img src="{{ asset($product->images->first()->url) }}"
+                                                class="w-75 img-fluid p-2" alt="..." />
+                                        @else
+                                            <img src="{{ asset('images/imageImage.webp') }}" class="w-75 img-fluid p-2"
+                                                alt="..." />
+                                        @endif
+
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="card-body">
+                                            <h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis"
+                                                class="card-title">{{ $product->ten }}</h5>
+                                            <p class="card-text m-0">
+                                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                                <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                            </p>
+                                            <p>
+
+                                            </p>
+                                            @if ($product->giamgia > 0)
+                                                <span
+                                                    class="card-price fw-medium fs-5">{{ number_format($product->giamgia, 0, ',', ',') }}₫</span>
+                                                &nbsp;
+                                                <del class="opacity-50 text-secondary">{{ number_format($product->gia, 0, ',', ',') }}₫
+                                                </del>
+                                            @else
+                                                <span
+                                                    class="card-price fw-medium fs-5">{{ number_format($product->gia, 0, ',', ',') }}₫</span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                        <a href="#" style="border: 1px solid rgb(234, 234, 234)"
-                            class="text-decoration-none card mb-3">
-                            <div class="row g-0">
-                                <div class="col-4 d-flex justify-content-center align-items-center">
-                                    <img src="{{ asset('clients/images/prod_1.png') }}" class="w-75 img-fluid p-2"
-                                        alt="..." />
-                                </div>
-                                <div class="col-8">
-                                    <div class="card-body">
-                                        <h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis"
-                                            class="card-title">Sony
-                                            PlayStation VR2 Approx. 110°, Communication​ with PS5</h5>
-                                        <p class="card-text m-0">
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                        </p>
-                                        <p>
-                                            <span class="card-price fw-medium fs-5">1,150,000₫</span> &nbsp;
-                                            <del class="opacity-50 text-warning"> 1,505,000₫ </del>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" style="border: 1px solid rgb(234, 234, 234)"
-                            class="text-decoration-none card mb-3">
-                            <div class="row g-0">
-                                <div class="col-4 d-flex justify-content-center align-items-center">
-                                    <img src="{{ asset('clients/images/prod_1.png') }}" class="w-75 img-fluid p-2"
-                                        alt="..." />
-                                </div>
-                                <div class="col-8">
-                                    <div class="card-body">
-                                        <h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis"
-                                            class="card-title">Sony
-                                            PlayStation VR2 Approx. 110°, Communication​ with PS5</h5>
-                                        <p class="card-text m-0">
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                            <i class="fa-solid fa-star" style="color: #bfbfc0"></i>
-                                        </p>
-                                        <p>
-                                            <span class="card-price fw-medium fs-5">1,150,000₫</span> &nbsp;
-                                            <del class="opacity-50 text-warning"> 1,505,000₫ </del>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        @endforeach --}}
+
+
                     </div>
                 </div>
             </div>

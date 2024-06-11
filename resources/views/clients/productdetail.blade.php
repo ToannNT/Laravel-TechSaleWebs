@@ -1,5 +1,5 @@
-{{-- @extends('layout.clientlayout') --}}
 @extends('layout.clientlayout')
+@section('tittle', 'Chi tiết sản phẩm')
 @section('content')
     @if (session('successAddToCart'))
         <div class="position-fixed top-20 end-0 p-3 " style="z-index: 10000">
@@ -27,14 +27,14 @@
                         @foreach ($oneProduct->images as $image)
                             <div class="item">
                                 <img style="max-height: 500px" class="mb-3 w-100 img-fluid object-fit-contain"
-                                    src="{{ $image->url }}" alt="" />
+                                    src="{{ asset($image->url) }}" alt="" />
                             </div>
                         @endforeach
                     </div>
                     <div class="slider-nav ">
                         @foreach ($oneProduct->images as $index => $image)
-                            <div class="item">
-                                <img class="px-2 w-100 img-fluid object-fit-contain" src="{{ $image->url }}"
+                            <div class="item" style="width: 100px; height: 130px;">
+                                <img class="px-1 w-100 h-100 " style="object-fit: fit" src="{{ asset($image->url) }}"
                                     alt="" />
                             </div>
 
@@ -214,7 +214,10 @@
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
                     tabindex="0">
-                    <div class="wrapper-infor" ng-bind-html="dsDetailPro.description | trustHtml"></div>
+                    <div class="wrapper-infor" ng-bind-html="dsDetailPro.description | trustHtml">
+                        {{ $oneProduct->motachitiet }}
+
+                    </div>
                 </div>
 
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"
@@ -293,43 +296,44 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <h1>Review This Product</h1>
-                            <form class="row g-2" action="#">
-                                <div class="col-6">
-                                    <label for="#" class="form-label fw-medium">Tên*:</label>
-                                    <input type="text" class="rounded-0 form-control p-3" placeholder="Tên của bạn.."
-                                        required />
-                                </div>
-                                <div class="col-6">
-                                    <label for="#" class="form-label fw-medium">Email*:</label>
-                                    <input type="email" class="rounded-0 form-control p-3"
-                                        placeholder="Nhập email của bạn.." required />
-                                </div>
-                                <div class="fs-4 col-12 product-review my-3">
-                                    Đánh giá sao:
-                                    <span><a href="#"><i class="fa-solid fa-star"
-                                                style="color: #d6d6d6"></i></a></span>
-                                    <span><a href="#"><i class="fa-solid fa-star"
-                                                style="color: #d6d6d6"></i></a></span>
-                                    <span><a href="#"><i class="fa-solid fa-star"
-                                                style="color: #d6d6d6"></i></a></span>
-                                    <span><a href="#"><i class="fa-solid fa-star"
-                                                style="color: #d6d6d6"></i></a></span>
-                                    <span><a href="#"><i class="fa-solid fa-star"
-                                                style="color: #d6d6d6"></i></a></span>
-                                </div>
-                                <label for="#" class="fs-5 fw-medium form-label fw-medium">Chia sẽ thêm về cảm nhận
-                                    của bạn:</label>
-                                <div class="form-floating">
-                                    <textarea class="rounded-0 form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                                        style="height: 150px"></textarea>
-                                    <label for="floatingTextarea2">Chia sẻ</label>
-                                </div>
+                            <h3>Review This Product</h1>
+                                <form class="row g-2" action="#">
+                                    <div class="col-6">
+                                        <label for="#" class="form-label fw-medium">Tên*:</label>
+                                        <input type="text" class="rounded-0 form-control p-2"
+                                            placeholder="Tên của bạn.." required />
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="#" class="form-label fw-medium">Email*:</label>
+                                        <input type="email" class="rounded-0 form-control p-2"
+                                            placeholder="Nhập email của bạn.." required />
+                                    </div>
+                                    <div class="fs-5 col-12 product-review my-3">
+                                        Đánh giá sao:
+                                        <span><a href="#"><i class="fa-solid fa-star"
+                                                    style="color: #d6d6d6"></i></a></span>
+                                        <span><a href="#"><i class="fa-solid fa-star"
+                                                    style="color: #d6d6d6"></i></a></span>
+                                        <span><a href="#"><i class="fa-solid fa-star"
+                                                    style="color: #d6d6d6"></i></a></span>
+                                        <span><a href="#"><i class="fa-solid fa-star"
+                                                    style="color: #d6d6d6"></i></a></span>
+                                        <span><a href="#"><i class="fa-solid fa-star"
+                                                    style="color: #d6d6d6"></i></a></span>
+                                    </div>
+                                    <label for="#" class="fs-5 fw-medium form-label fw-medium">Chia sẽ thêm về cảm
+                                        nhận
+                                        của bạn:</label>
+                                    <div class="form-floating">
+                                        <textarea class="rounded-0 form-control rounded-1" placeholder="Leave a comment here" id="floatingTextarea2"
+                                            style="height: 150px"></textarea>
+                                        <label for="floatingTextarea2">Chia sẻ</label>
+                                    </div>
 
-                                <div class="col-12">
-                                    <button class="btn btn-danger btn-lg rounded-0" type="submit">Gửi</button>
-                                </div>
-                            </form>
+                                    <div class="col-12">
+                                        <button class="btn btn-danger  rounded-1" type="submit">Gửi</button>
+                                    </div>
+                                </form>
                         </div>
                     </div>
                 </div>
@@ -347,16 +351,35 @@
 
                         <div class="col-12">
                             <div class="card card-product position-relative">
-                                {{-- <span style="top: 1%; left: 2%" class="position-absolute badge rounded-1 p-2 bg-dark"> -5%
-                            </span> --}}
-                                <span style="top: 1%; right: 2%" class="position-absolute badge rounded-1 p-2 bg-danger">
-                                    -5%
-                                </span>
+                                @if ($item->sold > 100)
+                                    <span style="top: 0%; left: 0%"
+                                        class="position-absolute text-bg-danger badge rounded-1  p-2 ">
+                                        Hot
+                                    </span>
+                                @endif
+
+                                @if ($item->giamgia > 0)
+                                    <span style="top: 0%; right: 0%"
+                                        class="position-absolute badge text-bg-warning rounded-1 p-2">
+                                        -50%
+                                    </span>
+                                @endif
+
 
                                 @if ($item->images->isNotEmpty())
-                                    <img src="{{ $item->images->first()->url }}" style="width: 100%; height: 20rem"
-                                        class="card-product__img card-img-top img-fluid object-fit-cover"
-                                        alt="..." />
+                                    <a href="{{ route('productdetail', $item->id) }}">
+                                        <img src="{{ asset($item->images->first()->url) }}"
+                                            style="width: 100%; height: 20rem"
+                                            class="card-product__img card-img-top img-fluid object-fit-cover"
+                                            alt="..." />
+                                    </a>
+                                @else
+                                    <a href="{{ route('productdetail', $product->id) }}">
+                                        <img src="{{ asset('images/imageImage.webp') }}"
+                                            style="width: 100%; height: 20rem"
+                                            class="card-product__img card-img-top img-fluid object-fit-cover"
+                                            alt="..." />
+                                    </a>
                                 @endif
 
                                 {{-- <img src="{{ $item->hinh }}" style="width: 100%; height: 20rem"
@@ -370,11 +393,11 @@
                                         {{ $item->ten }}
                                     </a>
                                     <p class="card-product__star">
-                                        <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                        <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                        <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                        <i class="fa-solid fa-star" style="color: #bcbec2"></i>
-                                        <i class="fa-solid fa-star" style="color: #bcbec2"></i>
+                                        <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                        <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                        <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                        <i class="fa-solid fa-star" style="color: #eaea14"></i>
+                                        <i class="fa-solid fa-star" style="color: #eaea14"></i>
                                     </p>
                                     <p class="card-product__quantity">Có sẵn: <span
                                             style="letter-spacing: 5px; font-weight: 600; font-size: 1.1rem"
@@ -383,7 +406,7 @@
                                     <hr class="border border-danger border-2 opacity-100" />
 
                                     @if ($item->giamgia > 0)
-                                        <p class="mt-3">
+                                        <p class="mt-3 m-0">
                                             <span class="card-price fw-medium fs-5">
                                                 {{ number_format($item->giamgia, 0, ',', ',') }}đ
                                             </span>
@@ -393,24 +416,13 @@
                                             </del>
                                         </p>
                                     @else
-                                        <p class="mt-3">
+                                        <p class="mt-3 m-0">
                                             <span
                                                 class="card-price fw-medium fs-5">{{ number_format($item->gia, 0, ',', ',') }}đ</span>
                                             &nbsp;
                                         </p>
                                     @endif
 
-                                    <div class="card-product__btn">
-                                        <div class="row g-2">
-                                            <div class="col-6">
-                                                <a href="#" class="col-12 btn btn-warning">Mua</a>
-                                            </div>
-                                            <div class="col-6">
-                                                <a href="#" class="col-12 btn btn-danger">Thêm</a>
-                                            </div>
-                                            <!-- <a href="#" class="col-6 btn btn-primary">Thêm</a> -->
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -470,19 +482,6 @@
 @section('js-directly')
     <script>
         $(document).ready(function() {
-            $(".carousel-product__images").owlCarousel({
-                items: 1,
-                loop: false,
-                center: true,
-                margin: 10,
-                URLhashListener: true,
-                autoplay: true,
-                autoplayTimeout: 5000,
-                autoplaySpeed: 2000,
-                autoplayHoverPause: true,
-                startPosition: "URLHash",
-            });
-
             $(".carousel-related__products").owlCarousel({
                 loop: true,
                 margin: 10,

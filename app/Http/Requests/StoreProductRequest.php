@@ -30,9 +30,9 @@ class StoreProductRequest extends FormRequest
             'quantity' => 'required|integer',
             'status' => 'required|boolean',
             'colors' => 'required|array',
-            'colors.*' => 'required|string|max:50',
+            'colors.*' => 'required|string|max:200',
             'images' => 'required|array',
-            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'motachitiet' => 'nullable|string',
         ];
     }

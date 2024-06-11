@@ -87,6 +87,29 @@ class Product extends Model
             ->where('catalog_id', $catalog_id)
             ->orderByDesc('id');
     }
+    public function scopeProductInterested($query, $limit)
+    {
+
+        return $query
+            ->with(['catalog', 'images'])
+            ->where('view', '>', 100)
+            ->orderByDesc('id')
+            ->limit($limit);
+    }
+    public function scopeProductSale($query, $limit)
+    {
+
+        return $query
+            ->with(['catalog', 'images'])
+            ->where('giamgia', '>', 0)
+            ->orderBy('giamgia', 'asc')
+            ->limit($limit);
+    }
+    public static function countItemByCategory($catalog_id)
+    {
+
+        return Product::where('catalog_id', $catalog_id)->count();
+    }
 
 
     public function scopeFilter(Builder $query, array $filters)
@@ -98,9 +121,6 @@ class Product extends Model
         if (!empty($filters['search'])) {
             $query->where('ten', 'like', '%' . $filters['search'] . '%');
         }
-
-
-
         if (!empty($filters['sortBy'])) {
             if ($filters['sortBy'] == 'price') {
                 // $query->orderBy('gia', 'asc');

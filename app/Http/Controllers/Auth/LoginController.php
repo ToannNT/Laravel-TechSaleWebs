@@ -31,7 +31,6 @@ class LoginController extends Controller
                 return redirect()->intended('/')->with('success', 'Đăng nhập thành công');
             } else {
                 Auth::logout();
-
                 return back()->withErrors([
                     'notauthentic' => 'Tài khoản của bạn chưa được xác thực !!!',
                 ])->withInput();

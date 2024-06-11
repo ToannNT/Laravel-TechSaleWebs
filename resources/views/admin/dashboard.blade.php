@@ -3,44 +3,53 @@
     <div class="container-fluid px-2">
         <div class="p-3 rounded border-0 my-3 shadow-lg">
             <h1 class="">Dashboard</h1>
-            <ol class="breadcrumb m-0">
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
         </div>
         <div class="p-3 rounded border-0 my-3 shadow-lg">
             <div class=" row">
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-primary text-white mb-4">
-                        <div class="card-body">Primary Card</div>
+                        <div class="card-body">
+                            <h5>Đang chờ duyệt:</h5>
+                            <h2>{{ $processingOrders }}</h2>
+                        </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">View Details</a>
+                            <a class="small text-white stretched-link" href="{{ route('admin.orders') }}">Xem đơn</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-warning text-white mb-4">
-                        <div class="card-body">Warning Card</div>
+                        <div class="card-body">
+                            <h5>Đang vận chuyển</h5>
+                            <h2>{{ $shippingOrders }}</h2>
+                        </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">View Details</a>
+                            <a class="small text-white stretched-link" href="{{ route('admin.orders') }}">Xem đơn</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-success text-white mb-4">
-                        <div class="card-body">Success Card</div>
+                        <div class="card-body">
+                            <h5>Đã giao</h5>
+                            <h2>{{ $deliveredOrders }}</h2>
+                        </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">View Details</a>
+                            <a class="small text-white stretched-link" href="{{ route('admin.orders') }}">Xem đơn</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-danger text-white mb-4">
-                        <div class="card-body">Danger Card</div>
+                        <div class="card-body">
+                            <h5>Đã hủy</h5>
+                            <h2>{{ $canceledOrders }}</h2>
+                        </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">View Details</a>
+                            <a class="small text-white stretched-link" href="{{ route('admin.orders') }}">Xem đơn</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>

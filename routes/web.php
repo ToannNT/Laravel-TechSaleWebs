@@ -64,6 +64,10 @@ Route::post('profile', [ProfileController::class, 'update'])->name('profile.upda
 
 
 Route::get('/order', [OrderController::class, 'index'])->name('order');
+Route::post('/orders/{order}/confirm', [OrderController::class, 'confirmOrder'])->name('orders.confirm');
+Route::post('/orders/{order}/cancel', [OrderController::class, 'cancelOrder'])->name('orders.cancel');
+
+
 Route::get('/orderdetail/{bill_id}', [OrderDetailController::class, 'index'])->name('orderdetail');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 // Có kiểm tra người dùng 
@@ -87,8 +91,14 @@ Route::post('admin/logout', [\App\Http\Controllers\admin\LoginAdminController::c
 //middleware route Admin 
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\admin\DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/area-data', [\App\Http\Controllers\Admin\DashboardController::class, 'getAreaChartData'])->name('admin.area-data');
+    Route::get('/bar-data', [\App\Http\Controllers\Admin\DashboardController::class, 'getBarChartData'])->name('admin.bar-data');
+    Route::get('/orders', [\App\Http\Controllers\Admin\OrderDetailAdmin::class, 'index'])->name('admin.orders');
+    Route::post('/orders/update-status/{id}', [\App\Http\Controllers\Admin\OrderDetailAdmin::class, 'updateStatus'])->name('orders.updateStatus');
+
     Route::resource('products', \App\Http\Controllers\admin\ProductController::class);
     Route::resource('users', \App\Http\Controllers\admin\UsersController::class);
+    Route::resource('catagories', \App\Http\Controllers\admin\CatagoryController::class);
 });
 
 // Route::prefix('admin')->name('admin.')->namespace('Admin')->middleware(['auth', 'admin'])->group(function () {

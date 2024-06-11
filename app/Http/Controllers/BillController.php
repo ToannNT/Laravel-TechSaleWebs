@@ -6,8 +6,10 @@ use App\Models\Bill;
 use App\Models\Cart;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+use App\Mail\OrderConfirmation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class BillController extends Controller
 {
@@ -22,10 +24,8 @@ class BillController extends Controller
             'pttt' => 'required|integer|in:0,1,2'
         ]);
 
-        // DB::transaction(function () use ($request) {
-        $bill = DB::transaction(function () use ($request) {
-
-            $user = Auth::user();
+        $user = Auth::user();
+        $bill = DB::transaction(function () use ($request, $user) {
             $total = Cart::where('user_id', $user->id)
                 ->where('status', 1)
                 ->sum(DB::raw('gia * soluong'));
@@ -74,8 +74,12 @@ class BillController extends Controller
             return $bill;
         });
 
-        // return redirect()->route('paymentsuccess',['ma_hd' => $bill->ma_hoadon])->with('success', 'Thanh toán thành công!');
-
-        return redirect()->route('paymentsuccess', ['ma_hd' => $bill->ma_hoadon])->with('success', 'Thanh toán thành công!');
+        // return redirect()->route('paymentsuccess',['ma_hd' => $bill->ma_hoadon])->with('success', 'Thanh toán thành công!'); // Gửi email xác nhận đơn hàng
+        if ($bill) {
+            Mail::to($user->email)->send(new OrderConfirmation($bill));
+            return redirect()->route('paymentsuccess', ['ma_hd' => $bill->ma_hoadon])->with('success', 'Thanh toán thành công!');
+        } else {
+            return redirect()->back()->with('error', 'Có lỗi xảy ra trong quá trình thanh toán!');
+        }
     }
 }

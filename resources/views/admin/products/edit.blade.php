@@ -71,6 +71,17 @@
                         </select>
                     </div>
 
+
+
+                    <div class="form-group col-md-3">
+                        <label>Số màu mới muốn thêm</label>
+                        <div class="d-flex">
+                            <input type="number" class="w-75 form-control" id="numColors" value="0" />
+                            <button type="button" class="btn btn-secondary w-25" onclick="addColors()">Thêm</button>
+                        </div>
+                    </div>
+
+                    <div id="newColorsContainer" class="form-group col-md-12"></div>
                     <!-- Màu sắc sản phẩm hiện tại -->
                     <div class="form-group col-md-12">
                         <label>Các màu hiện tại</label>
@@ -85,31 +96,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-md-3">
-                        <label>Số màu mới muốn thêm</label>
-                        <div class="d-flex">
-                            <input type="number" class="w-75 form-control" id="numColors" value="0" />
-                            <button type="button" class="btn btn-secondary w-25" onclick="addColors()">Thêm</button>
-                        </div>
-                    </div>
-
-                    <div id="newColorsContainer" class="form-group col-md-12"></div>
-
-                    <!-- Hình ảnh sản phẩm hiện tại -->
-                    <div class="form-group col-md-12">
-                        <label>Các hình ảnh hiện tại</label>
-                        <div id="imagesContainer" class="row">
-                            @foreach ($product->images as $image)
-                                <div class="col-md-3 d-flex flex-column align-items-center mb-3">
-                                    <img src="{{ asset('storage/' . $image->url) }}" class="img-thumbnail mb-2"
-                                        alt="Product Image">
-                                    <button type="button" class="btn btn-danger"
-                                        onclick="removeImage(this, '{{ $image->url }}')">Xóa</button>
-                                    <input type="hidden" name="existing_images[]" value="{{ $image->url }}">
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
 
                     <div class="form-group col-md-3">
                         <label>Số ảnh mới muốn thêm</label>
@@ -118,8 +104,23 @@
                             <button type="button" class="btn btn-secondary w-25" onclick="addImages()">Thêm</button>
                         </div>
                     </div>
-
                     <div id="newImagesContainer" class="form-group col-md-12"></div>
+
+                    <!-- Hình ảnh sản phẩm hiện tại -->
+                    <div class="form-group col-md-12 mb-4">
+                        <label>Các hình ảnh hiện tại</label>
+                        <div id="imagesContainer" class="row">
+                            @foreach ($product->images as $image)
+                                <div class="col-md-3 d-flex flex-column align-items-center mb-3" style="height: 300px">
+                                    <img src="{{ asset($image->url) }}" class="w-100 h-100 mb-2"
+                                        style="object-fit: cover;" alt="Product Image">
+                                    <button type="button" class="btn btn-danger"
+                                        onclick="removeImage(this, '{{ $image->url }}')">Xóa</button>
+                                    <input type="hidden" name="existing_images[]" value="{{ $image->url }}">
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
 
                     <div class="form-floating col-md-12">
                         <textarea class="form-control" name="motachitiet" placeholder="Leave a comment here" id="floatingTextarea2"

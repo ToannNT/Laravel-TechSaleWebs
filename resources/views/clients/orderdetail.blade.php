@@ -80,7 +80,7 @@
                                         ,{{ $informationDetailBill->sdt_nguoidat }}</strong>
                                 </li>
 
-                                <li class="list-group-item border-0 text-start">Mã đơn hàng:
+                                <li class="list-group-item border-0 text-start">Mã hóa đơn:
                                     <strong>{{ $informationDetailBill->ma_hoadon }}</strong>
                                 </li>
                                 <li class="list-group-item border-0 text-start">Ngày đặt hàng:
@@ -91,13 +91,9 @@
                                     @if ($informationDetailBill->pttt == 0)
                                         <strong> Thanh toán khi nhận hàng </strong>
                                     @elseif ($informationDetailBill->pttt == 1)
-                                        <span class="text-warning fw-bold">
-                                            Thẻ ngân hàng
-                                        </span>
+                                        <strong>Thẻ ngân hàng</strong>
                                     @elseif ($informationDetailBill->pttt == 2)
-                                        <span class="text-success fw-bold">
-                                            MoMo
-                                        </span>
+                                        <strong>MoMo</strong>
                                     @endif
                                 </li>
                             </ul>
@@ -116,6 +112,7 @@
                                 <th style="background-color: rgb(246, 246, 246)">Số lượng</th>
                                 <th style="background-color: rgb(246, 246, 246)">Giá</th>
                                 <th style="background-color: rgb(246, 246, 246)">Trạng thái</th>
+                                <th style="background-color: rgb(246, 246, 246)">Tác vụ</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -125,7 +122,7 @@
                                     <td class="align-middle">{{ $item->ten }}</td>
                                     <td class="d-flex justify-content-center">
                                         <div style="width: 100px">
-                                            <img style="width: 100%; object-git: cover;" src="{{ asset($item->hinh) }}"
+                                            <img style="width: 100%; object-fit: cover;" src="{{ asset($item->hinh) }}"
                                                 alt="" />
                                         </div>
                                     </td>
@@ -135,21 +132,36 @@
 
                                     <td class="align-middle text-center" style="font-size: 0.9rem">
                                         @if ($item->status == 0)
-                                            <span class="color-red fw-bold">
-                                                Đang xử lí
-                                            </span>
+                                            <span class="fw-bold">Đang chờ duyệt</span>
                                         @elseif ($item->status == 1)
-                                            <span class="text-warning fw-bold">
-                                                Đang vận chuyển
-                                            </span>
+                                            <span class="text-warning fw-bold">Đang vận chuyển</span>
                                         @elseif ($item->status == 2)
-                                            <span class="text-success fw-bold">
-                                                Đã nhận được hàng
+                                            {{-- <span class=" fw-bold">Đã nhận được hàng --}}
+                                            <form class="text-bg-warning" action="{{ route('orders.confirm', $item->id) }}"
+                                                method="POST" style="display:inline;">
+                                                @csrf
+                                                <button type="submit" class="btn btn-success btn-sm">Đã nhận được
+                                                    hàng</button>
+                                            </form>
                                             </span>
+                                        @elseif ($item->status == 3)
+                                            <span class="text-success fw-bold">Hoàn thành</span>
+                                        @elseif ($item->status == 4)
+                                            <span class="text-danger fw-bold">Đã hủy</span>
+                                        @endif
+                                    </td>
+                                    <td class="d-flex">
+                                        @if ($item->status <= 2)
+                                            <form action="{{ route('orders.cancel', $item->id) }}" method="POST"
+                                                style="display:inline;">
+                                                @csrf
+                                                <button type="submit" class=" btn btn-danger btn-sm">Hủy đơn</button>
+                                            </form>
                                         @endif
                                     </td>
                                 </tr>
                             @endforeach
+
 
                         </tbody>
                         <footer>

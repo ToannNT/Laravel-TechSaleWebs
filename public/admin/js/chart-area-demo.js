@@ -2,53 +2,79 @@
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
-// Area Chart Example
-var ctx = document.getElementById("myAreaChart");
-var myLineChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: ["Mar 1", "Mar 2", "Mar 3", "Mar 4", "Mar 5", "Mar 6", "Mar 7", "Mar 8", "Mar 9", "Mar 10", "Mar 11", "Mar 12", "Mar 13"],
-    datasets: [{
-      label: "Sessions",
-      lineTension: 0.3,
-      backgroundColor: "rgba(2,117,216,0.2)",
-      borderColor: "rgba(2,117,216,1)",
-      pointRadius: 5,
-      pointBackgroundColor: "rgba(2,117,216,1)",
-      pointBorderColor: "rgba(255,255,255,0.8)",
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgba(2,117,216,1)",
-      pointHitRadius: 50,
-      pointBorderWidth: 2,
-      data: [10000, 30162, 26263, 18394, 18287, 28682, 31274, 33259, 25849, 24159, 32651, 31984, 38451],
-    }],
-  },
-  options: {
-    scales: {
-      xAxes: [{
-        time: {
-          unit: 'date'
-        },
-        gridLines: {
-          display: false
-        },
-        ticks: {
-          maxTicksLimit: 7
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          min: 0,
-          max: 40000,
-          maxTicksLimit: 5
-        },
-        gridLines: {
-          color: "rgba(0, 0, 0, .125)",
-        }
+// Function to fetch data and create the chart
+async function fetchAreaChartData() {
+  try {
+    const response = await fetch('/admin/area-data');
+    const data = await response.json();
+    createAreaChart(data);
+  } catch (error) {
+    console.error('Error fetching area chart data:', error);
+  }
+}
+
+// Function to create the Area Chart
+function createAreaChart(data) {
+  var ctx = document.getElementById("myAreaChart");
+  var myLineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: data.labels,
+      datasets: [{
+        label: "Revenue",
+        lineTension: 0.3,
+        backgroundColor: "rgba(2,117,216,0.2)",
+        borderColor: "rgba(2,117,216,1)",
+        pointRadius: 5,
+        pointBackgroundColor: "rgba(2,117,216,1)",
+        pointBorderColor: "rgba(255,255,255,0.8)",
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(2,117,216,1)",
+        pointHitRadius: 50,
+        pointBorderWidth: 2,
+        data: data.revenue,
       }],
     },
-    legend: {
-      display: false
+    options: {
+      scales: {
+        xAxes: [{
+          time: {
+            unit: 'date'
+          },
+          gridLines: {
+            display: false
+          },
+          ticks: {
+            maxTicksLimit: 7
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            min: 0,
+            max: Math.max(...data.revenue) + 1000,
+            maxTicksLimit: 5,
+            callback: function (value, index, values) {
+              return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
+            }
+          },
+          gridLines: {
+            color: "rgba(0, 0, 0, .125)",
+          }
+        }],
+      },
+      legend: {
+        display: false
+      },
+      tooltips: {
+        callbacks: {
+          label: function (tooltipItem, chart) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(tooltipItem.yLabel);
+          }
+        }
+      }
     }
-  }
-});
+  });
+}
+
+// Fetch the data and create the chart
+fetchAreaChartData();

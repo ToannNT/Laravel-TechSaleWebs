@@ -74,7 +74,7 @@
                             <!-- <h5 class="card-tittle fw-medium mb-4 text-center">Đơn hàng</h5> -->
                             <div style="width: 100px" class="col-12">
                                 <img class="w-100 img-fluid object-fit-contain"
-                                    src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"
+                                    src="{{ $user->profile_picture ? asset('images/user/' . $user->profile_picture) : asset('images/user/defaultImageUser.png') }}"
                                     alt="" />
                             </div>
                             <div class="col-12 text-center mt-3">
@@ -132,8 +132,10 @@
                                         <td style="font-size: 0.9rem" scope="row">{{ $item->ma_hoadon }}</td>
                                         <td style="font-size: 0.9rem" class="tr_td">
                                             {{ $item->created_at->format('d-m-Y') }}</td>
-                                        <!-- <td style="font-size: 0.9rem" class="tr_td">VYXWG2</td> -->
-                                        <td style="font-size: 0.9rem" class="tr_td">3</td>
+                                        @php
+                                            $orderDetailCount = $item->orderDetails->count();
+                                        @endphp
+                                        <td style="font-size: 0.9rem" class="tr_td">{{ $orderDetailCount }}</td>
                                         <td style="font-size: 0.9rem" class="tr_td">
                                             {{ number_format($item->tong, 0, ',', '.') }}đ</td>
                                         <!-- <td style="font-size: 0.9rem" class="tr_td"><span style="color: #5273f9; font-weight: bold" href="#">Đang giao</span></td> -->

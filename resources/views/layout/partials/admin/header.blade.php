@@ -106,7 +106,7 @@
 
                     <!-- CATEGORY  -->
                     <div class="sb-sidenav-menu-heading text-white opacity-75">Danh mục</div>
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('catagories.index') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         Danh sách danh mục
                     </a>
@@ -120,10 +120,32 @@
                     <div class="collapse" id="collapseCategory" aria-labelledby="headingTwo"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                            <a class="nav-link" href="layout-static.html">Thêm danh mục</a>
+                            <a class="nav-link" href="{{ route('catagories.create') }}">Thêm danh mục</a>
                         </nav>
                     </div>
                     <!-- End collapse 2  -->
+
+                    <!-- BILL  -->
+                    <div class="sb-sidenav-menu-heading text-white opacity-75">Đơn hàng</div>
+                    <a class="nav-link" href="{{ route('catagories.index') }}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        Danh sách đơn hàng
+                    </a>
+                    <!-- collapse BILL  -->
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                        data-bs-target="#collapseBill" aria-expanded="false" aria-controls="collapseBill">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Thao tác đơn hàng
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseBill" aria-labelledby="headingTwo"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link" href="{{ route('catagories.create') }}">Thêm danh mục</a>
+                        </nav>
+                    </div>
+                    <!-- End collapse BILL  -->
+
 
                     <!-- USERS  -->
                     <div class="sb-sidenav-menu-heading text-white opacity-75">Tài khoản</div>

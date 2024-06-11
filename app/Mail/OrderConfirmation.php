@@ -2,34 +2,27 @@
 
 namespace App\Mail;
 
+use App\Models\Bill;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class VerifyEmail extends Mailable
+class OrderConfirmation extends Mailable
 {
     use Queueable, SerializesModels;
-    public $user;
+    public $bill;
+
 
     /**
      * Create a new message instance.
      */
-    public function __construct($user)
+    public function __construct(Bill $bill)
     {
-        $this->user = $user;
+        $this->bill = $bill;
     }
-    // public function build()
-    // {
-    //     return $this->subject('Xác thực email của bạn')
-    //         ->view('clients.verify')
-    //         ->with([
-    //             'user' => $this->user,
-    //             'verificationUrl' => url('verify-email/' . $this->user->id . '/' . $this->user->verification_token),
-    //         ]);
-    // }
 
     /**
      * Get the message envelope.
@@ -37,7 +30,7 @@ class VerifyEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Xác thực email của bạn',
+            subject: 'Xác nhận đơn hàng của bạn',
         );
     }
 
@@ -47,8 +40,8 @@ class VerifyEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'clients.verify',
-            with: ['user' => $this->user],
+            // view: 'view.name',
+            view: 'clients.order_confirmation',
         );
     }
 
