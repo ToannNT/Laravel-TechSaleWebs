@@ -22,9 +22,5 @@ class CheckAdminMiddleware
             return $next($request);
         }
         return redirect()->route('admin.login')->withErrors(['error' => 'Tài khoản không có quyền truy cập']);
-
-
-        // return $next($request);
-
     }
 }

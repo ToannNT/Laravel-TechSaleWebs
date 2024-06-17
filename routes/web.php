@@ -30,13 +30,6 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 |
 */
 
-// Route::middleware(['auth', 'verified'])->group(function () {
-//     Route::get('/dashboard', [RegisterController::class, 'index'])->name('dashboard');
-
-// });
-
-
-
 Route::get('/', [HomeController::class, 'index'])->name('');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/product', [ProductController::class, 'index'])->name('product');
@@ -88,19 +81,14 @@ Route::get('admin/login', [\App\Http\Controllers\admin\LoginAdminController::cla
 Route::post('admin/login', [\App\Http\Controllers\admin\LoginAdminController::class, 'login'])->name('admin.login.submit');
 Route::post('admin/logout', [\App\Http\Controllers\admin\LoginAdminController::class, 'logout'])->name('adminlogout.submit');
 
-//middleware route Admin 
+//check middleware route Admin 
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\admin\DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/area-data', [\App\Http\Controllers\Admin\DashboardController::class, 'getAreaChartData'])->name('admin.area-data');
     Route::get('/bar-data', [\App\Http\Controllers\Admin\DashboardController::class, 'getBarChartData'])->name('admin.bar-data');
     Route::get('/orders', [\App\Http\Controllers\Admin\OrderDetailAdmin::class, 'index'])->name('admin.orders');
     Route::post('/orders/update-status/{id}', [\App\Http\Controllers\Admin\OrderDetailAdmin::class, 'updateStatus'])->name('orders.updateStatus');
-
     Route::resource('products', \App\Http\Controllers\admin\ProductController::class);
     Route::resource('users', \App\Http\Controllers\admin\UsersController::class);
     Route::resource('catagories', \App\Http\Controllers\admin\CatagoryController::class);
 });
-
-// Route::prefix('admin')->name('admin.')->namespace('Admin')->middleware(['auth', 'admin'])->group(function () {
-//     Route::resource('products', ProductController::class);
-// });
