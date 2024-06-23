@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('catalogs', function (Blueprint $table) {
             $table->id();
             $table->string('ten_dm', 50);
-            $table->integer('stt', 4);
+            $table->unsignedInteger('stt'); // cột số nguyên không âm, không auto_increment
             $table->tinyInteger('sethome')->default(0)->comment('0:Không set home\r\n1:Set home');
             $table->timestamps();
         });

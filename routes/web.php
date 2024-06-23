@@ -15,7 +15,6 @@ use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\PaymentSuccessController;
-
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;

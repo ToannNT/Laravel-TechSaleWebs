@@ -13,16 +13,6 @@ class HomeController extends Controller
         $newProduct = Product::newProduct(8)->get();
         $interestedProduct = Product::productInterested(3)->get();
         $saleProduct = Product::productSale(3)->get();
-
-
-        // dd($hotProduct);
         return view("clients.home", compact("hotProduct", "newProduct", "interestedProduct", "saleProduct"));
     }
-
-
-    // public function HotProduct()
-    // {
-    //     $hotProduct = Product::hotProduct(8)->get();
-    //     return view("clients.home", compact("hotProduct"));
-    // }
 }
